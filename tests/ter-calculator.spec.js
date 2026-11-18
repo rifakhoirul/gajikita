@@ -99,6 +99,8 @@ test.describe('hitungGaji end-to-end', () => {
   test('input tidak valid ditolak', () => {
     expect(() => calc.hitungGaji({ gajiPokok: -1, ptkp: 'TK/0' })).toThrow();
     expect(() => calc.hitungGaji({ gajiPokok: 'abc', ptkp: 'TK/0' })).toThrow();
+    expect(() => calc.hitungGaji({ gajiPokok: '', ptkp: 'TK/0' })).toThrow();
+    expect(() => calc.hitungGaji({ gajiPokok: null, ptkp: 'TK/0' })).toThrow();
     expect(() => calc.hitungGaji({ ptkp: 'TK/0' })).toThrow();
     expect(() => calc.hitungGaji({ gajiPokok: 5_000_000, ptkp: 'ZZ' })).toThrow();
   });

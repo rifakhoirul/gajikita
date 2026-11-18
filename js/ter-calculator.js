@@ -95,7 +95,11 @@ function jp(bruto) {
 }
 
 function validasiInput(input) {
-  const gaji = Number(input && input.gajiPokok);
+  const raw = input && input.gajiPokok;
+  if (raw === '' || raw == null) {
+    throw new Error('Gaji pokok wajib diisi');
+  }
+  const gaji = Number(raw);
   if (!Number.isFinite(gaji) || gaji < 0) {
     throw new Error('Gaji pokok harus angka >= 0');
   }

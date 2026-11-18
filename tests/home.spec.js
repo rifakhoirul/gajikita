@@ -10,12 +10,12 @@ test('homepage renders brand & hero', async ({ page }) => {
   await expect(page.locator('h1')).toContainText('gaji bersih');
 });
 
-test('asset links use cache-bust ?v=1', async ({ page }) => {
+test('asset links use cache-bust ?v=<n>', async ({ page }) => {
   await page.goto(INDEX);
   const cssHref = await page.locator('link[rel="stylesheet"]').getAttribute('href');
   const jsSrc = await page.locator('script[src]').getAttribute('src');
-  expect(cssHref).toContain('?v=1');
-  expect(jsSrc).toContain('?v=1');
+  expect(cssHref).toMatch(/\?v=\d+/);
+  expect(jsSrc).toMatch(/\?v=\d+/);
 });
 
 test('CNAME file points to custom domain', async () => {

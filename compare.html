@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adu Offering — Bandingkan Dua Penawaran Kerja | GajiCVKita</title>
+  <meta name="description" content="Bandingkan dua penawaran kerja side-by-side: take-home pay PPh 21 TER, BPJS, THR, bonus, komuter, dan skema kerja (WFO/Hybrid/Remote). Semua dihitung di browser, gratis.">
+  <link rel="canonical" href="https://gaji.cvkita.id/compare.html">
+  <link rel="stylesheet" href="css/style.css?v=2">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/">Gaji<span>CVKita</span></a>
+    <nav class="nav">
+      <a href="index.html">Kalkulator Gaji</a>
+      <a href="compare.html">Adu Offering</a>
+      <a href="offer-analyzer.html">Offer Analyzer</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Adu Offering A vs B</h1>
+      <p class="sub">Dapat dua penawaran? Masukkan angkanya, kami hitung take-home pay &amp; total kompensasi setahun — termasuk komuter dan skema kerja.</p>
+    </section>
+
+    <section class="compare-wrap">
+      <form id="form-compare" autocomplete="off">
+        <div class="offer-cols">
+          <fieldset class="offer-col" id="offer-a">
+            <legend>Offer A</legend>
+            <label for="a-gaji">Gaji Pokok (Rp)</label>
+            <input id="a-gaji" type="number" min="0" step="1000" placeholder="contoh: 8000000">
+            <label for="a-tetap">Tunjangan Tetap (Rp)</label>
+            <input id="a-tetap" type="number" min="0" step="1000" placeholder="0">
+            <label for="a-thr">THR (Rp/tahun)</label>
+            <input id="a-thr" type="number" min="0" step="100000" placeholder="0">
+            <label for="a-bonus">Bonus Tahunan (Rp)</label>
+            <input id="a-bonus" type="number" min="0" step="100000" placeholder="0">
+            <label for="a-manfaat">Manfaat/Asuransi (Rp/bulan)</label>
+            <input id="a-manfaat" type="number" min="0" step="50000" placeholder="0">
+            <label for="a-komuter">Biaya Komuter (Rp/bulan)</label>
+            <input id="a-komuter" type="number" min="0" step="50000" placeholder="0">
+            <label for="a-skema">Skema Kerja</label>
+            <select id="a-skema">
+              <option value="WFO">WFO</option>
+              <option value="Hybrid">Hybrid</option>
+              <option value="Remote">Remote</option>
+            </select>
+            <label for="a-ptkp">Status PTKP</label>
+            <select id="a-ptkp">
+              <option value="TK/0">TK/0 — Tidak kawin</option>
+              <option value="TK/1">TK/1</option>
+              <option value="K/0" selected>K/0 — Kawin</option>
+              <option value="K/1">K/1</option>
+              <option value="K/2">K/2</option>
+              <option value="K/3">K/3</option>
+            </select>
+          </fieldset>
+
+          <fieldset class="offer-col" id="offer-b">
+            <legend>Offer B</legend>
+            <label for="b-gaji">Gaji Pokok (Rp)</label>
+            <input id="b-gaji" type="number" min="0" step="1000" placeholder="contoh: 9000000">
+            <label for="b-tetap">Tunjangan Tetap (Rp)</label>
+            <input id="b-tetap" type="number" min="0" step="1000" placeholder="0">
+            <label for="b-thr">THR (Rp/tahun)</label>
+            <input id="b-thr" type="number" min="0" step="100000" placeholder="0">
+            <label for="b-bonus">Bonus Tahunan (Rp)</label>
+            <input id="b-bonus" type="number" min="0" step="100000" placeholder="0">
+            <label for="b-manfaat">Manfaat/Asuransi (Rp/bulan)</label>
+            <input id="b-manfaat" type="number" min="0" step="50000" placeholder="0">
+            <label for="b-komuter">Biaya Komuter (Rp/bulan)</label>
+            <input id="b-komuter" type="number" min="0" step="50000" placeholder="0">
+            <label for="b-skema">Skema Kerja</label>
+            <select id="b-skema">
+              <option value="WFO">WFO</option>
+              <option value="Hybrid">Hybrid</option>
+              <option value="Remote">Remote</option>
+            </select>
+            <label for="b-ptkp">Status PTKP</label>
+            <select id="b-ptkp">
+              <option value="TK/0">TK/0 — Tidak kawin</option>
+              <option value="TK/1">TK/1</option>
+              <option value="K/0" selected>K/0 — Kawin</option>
+              <option value="K/1">K/1</option>
+              <option value="K/2">K/2</option>
+              <option value="K/3">K/3</option>
+            </select>
+          </fieldset>
+        </div>
+
+        <button id="btn-bandingkan" type="submit" class="btn btn-primary">Bandingkan Sekarang</button>
+        <p id="compare-error" class="form-error" hidden></p>
+      </form>
+
+      <section id="hasil-compare" class="hasil" hidden>
+        <p id="winner-line" class="winner-line"></p>
+        <div class="compare-grid" id="compare-grid"></div>
+        <p class="catatan">Total kompensasi setahun = THP×12 + THR + bonus + manfaat×12 − komuter×12. Skema kerja dan nilai fleksibilitas ditampilkan sebagai konteks keputusan.</p>
+      </section>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Dari <a href="https://cvkita.id">CVKita</a> — CV builder gratis untuk fresh graduate Indonesia.</p>
+  </footer>
+
+  <script type="module" src="js/compare-page.js?v=2"></script>
+</body>
+</html>

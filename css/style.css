@@ -83,3 +83,150 @@ main { max-width: 960px; margin: 0 auto; padding: 24px 20px 48px; }
   font-size: 0.9rem;
 }
 .site-footer a { color: var(--brand); }
+
+/* ===== HG-005: Kalkulator ===== */
+.kalkulator {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 20px;
+  margin-top: 12px;
+}
+.kalkulator h2 { margin: 0 0 4px; font-size: 1.25rem; }
+.hint { color: var(--muted); font-size: 0.9rem; margin: 0 0 16px; }
+
+#form-gaji label, .offer-col label {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 600;
+  margin: 12px 0 4px;
+}
+#form-gaji input, #form-gaji select,
+.offer-col input, .offer-col select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-size: 1rem;
+  background: #fff;
+}
+#form-gaji input:focus, #form-gaji select:focus,
+.offer-col input:focus, .offer-col select:focus {
+  outline: 2px solid var(--brand);
+  border-color: var(--brand);
+}
+#form-gaji .btn { margin-top: 16px; width: 100%; border: 0; cursor: pointer; }
+
+.form-error {
+  color: #b91c1c;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 0.92rem;
+}
+
+.hasil { margin-top: 24px; }
+.hasil-utama {
+  background: linear-gradient(135deg, var(--brand) 0%, var(--brand-dark) 100%);
+  color: #fff;
+  border-radius: 14px;
+  padding: 20px;
+  text-align: center;
+}
+.hasil-label { margin: 0; font-size: 0.9rem; opacity: 0.9; }
+.hasil-angka { margin: 4px 0; font-size: clamp(1.8rem, 6vw, 2.4rem); font-weight: 800; }
+.hasil-sub { margin: 0; font-size: 0.92rem; opacity: 0.95; }
+
+.hasil-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-top: 16px;
+}
+@media (min-width: 640px) { .hasil-grid { grid-template-columns: 1.4fr 1fr; } }
+
+.rincian { border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
+.rincian h3 { margin: 0 0 8px; font-size: 0.95rem; }
+.rincian ul { list-style: none; margin: 0; padding: 0; }
+.rincian li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 0;
+  border-bottom: 1px dashed var(--line);
+  font-size: 0.92rem;
+}
+.rincian li:last-child { border-bottom: 0; font-weight: 700; }
+
+.donut-wrap { text-align: center; }
+#donut { width: 160px; height: 160px; }
+.donut-caption { color: var(--muted); font-size: 0.88rem; margin: 4px 0 0; }
+
+.catatan { color: var(--muted); font-size: 0.85rem; margin-top: 16px; }
+.card-link { display: inline-block; margin-top: 10px; color: var(--brand); font-weight: 600; text-decoration: none; }
+.card-link:hover { text-decoration: underline; }
+
+/* ===== HG-005: Compare ===== */
+.compare-wrap { margin-top: 12px; }
+.offer-cols {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+@media (min-width: 720px) { .offer-cols { grid-template-columns: 1fr 1fr; } }
+
+.offer-col {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 14px 16px 18px;
+  margin: 0;
+}
+.offer-col legend { font-weight: 800; padding: 0 6px; }
+#form-compare .btn { margin-top: 18px; width: 100%; border: 0; cursor: pointer; }
+
+.winner-line {
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: #065f46;
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-weight: 700;
+  text-align: center;
+}
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-top: 16px;
+}
+@media (min-width: 720px) { .compare-grid { grid-template-columns: 1fr 1fr; } }
+
+.compare-card {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px;
+}
+.compare-card.winner { border-color: var(--brand); box-shadow: 0 0 0 2px rgba(15, 118, 110, 0.15); }
+.compare-card h3 { margin: 0 0 6px; font-size: 1rem; }
+.badge {
+  background: var(--accent);
+  color: #78350f;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  padding: 2px 8px;
+  vertical-align: middle;
+}
+.compare-thp { font-size: 1.5rem; font-weight: 800; margin: 0 0 10px; color: var(--brand-dark); }
+.compare-thp span { font-size: 0.85rem; font-weight: 500; color: var(--muted); }
+.compare-list { list-style: none; margin: 0; padding: 0; }
+.compare-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 5px 0;
+  border-bottom: 1px dashed var(--line);
+  font-size: 0.9rem;
+}
+.compare-list li:last-child { border-bottom: 0; }
+.compare-total { border-top: 2px solid var(--line); margin: 10px 0 6px; padding-top: 10px; display: flex; justify-content: space-between; font-weight: 700; }
+.compare-skema { color: var(--muted); font-size: 0.85rem; margin: 0; }
