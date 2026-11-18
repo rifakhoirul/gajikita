@@ -230,3 +230,89 @@ main { max-width: 960px; margin: 0 auto; padding: 24px 20px 48px; }
 .compare-list li:last-child { border-bottom: 0; }
 .compare-total { border-top: 2px solid var(--line); margin: 10px 0 6px; padding-top: 10px; display: flex; justify-content: space-between; font-weight: 700; }
 .compare-skema { color: var(--muted); font-size: 0.85rem; margin: 0; }
+
+/* ===== HG-006: Offer Analyzer & Checkout ===== */
+textarea#offer-teks {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  resize: vertical;
+}
+textarea#offer-teks:focus { outline: 2px solid var(--brand); border-color: var(--brand); }
+
+.teaser { border-left: 4px solid var(--accent); padding-left: 16px; }
+.teaser-title { color: var(--muted); font-size: 0.9rem; margin: 0; }
+.teaser-verdict { font-size: clamp(1.6rem, 5vw, 2.2rem); font-weight: 800; margin: 4px 0 10px; color: var(--brand-dark); }
+.teaser-label { color: var(--muted); }
+.paywall {
+  margin-top: 16px;
+  border: 1px dashed var(--line);
+  border-radius: 12px;
+  padding: 16px;
+  background: #f8fafc;
+}
+.paywall p { margin: 0 0 12px; }
+.lic-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.lic-row input {
+  flex: 1;
+  min-width: 200px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-size: 1rem;
+}
+.btn-secondary {
+  background: #fff;
+  color: var(--brand-dark);
+  border: 2px solid var(--brand);
+  cursor: pointer;
+}
+.btn-secondary:hover { background: #ecfdf5; }
+
+.risks { list-style: none; margin: 0; padding: 0; }
+.risks li { padding: 8px 0; border-bottom: 1px dashed var(--line); font-size: 0.92rem; }
+.risks li:last-child { border-bottom: 0; }
+.risk .sev {
+  font-size: 0.72rem;
+  font-weight: 800;
+  border-radius: 999px;
+  padding: 2px 8px;
+  margin-left: 6px;
+}
+.risk-high .sev { background: #fee2e2; color: #991b1b; }
+.risk-medium .sev { background: #fef3c7; color: #92400e; }
+.risk-low .sev { background: #e0f2fe; color: #075985; }
+.leverage { color: var(--muted); font-size: 0.92rem; margin: 0; }
+
+.scripts { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: 16px; }
+@media (min-width: 720px) { .scripts { grid-template-columns: 1fr; } }
+.scripts pre {
+  white-space: pre-wrap;
+  background: #f8fafc;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  margin: 0 0 8px;
+}
+
+.tier-card { text-align: center; }
+.tier-pricing { display: flex; justify-content: center; align-items: baseline; gap: 10px; margin: 8px 0 14px; }
+.tier-price { font-size: 2rem; font-weight: 800; color: var(--brand-dark); }
+.tier-save {
+  background: #ecfdf5;
+  color: #065f46;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 4px 10px;
+}
+.tier-list { list-style: none; text-align: left; margin: 0 auto 18px; max-width: 460px; padding: 0; }
+.tier-list li { padding: 6px 0; border-bottom: 1px dashed var(--line); font-size: 0.95rem; }
+.tier-list li:last-child { border-bottom: 0; }
+#btn-buy { width: 100%; max-width: 460px; border: 0; cursor: pointer; }
+#pay-status { min-height: 1.4em; font-size: 0.95rem; }
