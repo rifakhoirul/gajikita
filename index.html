@@ -11,8 +11,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
   <!-- Design System v1.1 + Legacy style.css -->
-  <link rel="stylesheet" href="css/design-system.css?v=12">
-  <link rel="stylesheet" href="css/style.css?v=12">
+  <link rel="stylesheet" href="css/design-system.css?v=13">
+  <link rel="stylesheet" href="css/style.css?v=13">
 </head>
 <body>
   <!-- Compact Sticky Header + Segmented Navigation -->
@@ -20,7 +20,7 @@
     <div class="header-inner">
       <div class="brand-row">
         <a href="/" class="brand brand-logo">Gaji<span>CVKita</span></a>
-        <span class="brand-badge">v1.1 TERBARU</span>
+        <span class="brand-badge">TER 2026</span>
       </div>
       <nav class="segmented-nav" id="mainNav">
         <a href="/" class="active" id="navCalc">Kalkulator</a>
@@ -34,8 +34,7 @@
     <!-- Compact Left-Aligned Hero -->
     <section class="hero-compact">
       <h1 id="pageTitle">Berapa sih gaji bersih kamu sebenarnya?</h1>
-      <p id="pageSubtitle">Hitung potongan PPh 21 TER 2026 (PP 58/2023 & PMK 168/2023) & BPJS secara akurat.</p>
-      <p class="hero-cta"><a class="btn btn-primary" href="#kalkulator">Buka Kalkulator</a></p>
+      <p id="pageSubtitle">Hitung potongan PPh 21 TER 2026 (PP 58/2023 & PMK 168/2023) & BPJS sebagai estimasi.</p>
     </section>
 
     <!-- Preset Quick-Fill Chips -->
@@ -81,11 +80,11 @@
         <div class="form-group">
           <label for="ptkp" class="form-label">Status PTKP</label>
           <select id="ptkp" name="ptkp" class="select-input">
-            <option value="TK/0">TK/0 — Tidak kawin, 0 Tanggungan</option>
+            <option value="TK/0" selected>TK/0 — Tidak kawin, 0 Tanggungan</option>
             <option value="TK/1">TK/1 — Tidak kawin, 1 Tanggungan</option>
             <option value="TK/2">TK/2 — Tidak kawin, 2 Tanggungan</option>
             <option value="TK/3">TK/3 — Tidak kawin, 3 Tanggungan</option>
-            <option value="K/0" selected>K/0 — Kawin, 0 Tanggungan</option>
+            <option value="K/0">K/0 — Kawin, 0 Tanggungan</option>
             <option value="K/1">K/1 — Kawin, 1 Tanggungan</option>
             <option value="K/2">K/2 — Kawin, 2 Tanggungan</option>
             <option value="K/3">K/3 — Kawin, 3 Tanggungan</option>
@@ -179,6 +178,6 @@
     </div>
   </footer>
 
-  <script type="module" src="js/calculator-page.js?v=12"></script>
+  <script type="module" src="js/calculator-page.js?v=13"></script>
 </body>
 </html>
