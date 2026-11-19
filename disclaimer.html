@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Disclaimer — GajiCVKita</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+<link rel="stylesheet" href="css/style.css?v=7">
+<style>
+  main{max-width:720px;margin:24px auto;padding:0 16px 48px}
+  h2{margin:26px 0 10px}
+  h3{margin:18px 0 8px}
+  p,li{line-height:1.75;color:#374151}
+  ul,ol{padding-left:22px;margin:10px 0}
+  li{margin-bottom:6px}
+  .update{font-size:.85rem;color:#4b5563}
+  .highlight{background:#fef3c7;padding:16px;border-radius:8px;border:1px solid #fde68a;margin:16px 0}
+</style>
+</head>
+<body>
+<header class="topbar"><a class="logo" href="/" style="text-decoration:none;color:inherit">Gaji<span>CVKita</span></a></header>
+<main>
+  <h2>Disclaimer</h2>
+  <p class="update">Terakhir diperbarui: 19 November 2026</p>
+
+  <div class="highlight">
+    <strong>⚠️ Simulasi ini bersifat edukatif dan bukan nasihat pajak atau hukum resmi.</strong>
+    <br>
+    Semua angka take-home pay, total kompensasi, estimasi rentang pasar, target counter-offer, dan analisis risiko klausul di gaji.cvkita.id adalah <strong>perkiraan berbasis data publik dan asumsi standar</strong>. Angka aktual bisa berbeda.
+  </div>
+
+  <h3>1. Dasar Perhitungan Pajak (PPh 21 TER)</h3>
+  <ul>
+    <li>Menggunakan tarif efektif <strong>PP 58/2023</strong> (turunan PMK 168/2023) yang berlaku Tahun Pajak 2024—2026.</li>
+    <li>Kategori TER (A, B, C) dipetakan dari status PTKP sesuai aturan: <strong>TK/0, TK/1, TK/2, TK/3 → Kategori B</strong>; <strong>K/0, K/1, K/2, K/3 → Kategori A</strong>.</li>
+    <li>Plafon BPJS Kesehatan: <strong>Rp 12.000.000/tahun</strong> (1% × gaji, cap Rp 1.000.000/bln). Plafon BPJS Jaminan Pensiun (JP): <strong>Rp 11.086.300/bulan</strong> (1% × gaji, cap).</li>
+    <li>Perhitungan <strong>tidak termasuk</strong> penyesuaian akhir tahun (<em>true-up</em>) <strong>Pasal 17 Masa Pajak Desember</strong> — perusahaan wajib hitung ulang PPh 21 setahun penuh di bulan Desember, hasilnya bisa lebih besar/kecil dari simulasi bulanan.</li>
+  </ul>
+
+  <h3>2. Estimasi Rentang Pasar (AI Offer Analyzer)</h3>
+  <ul>
+    <li>Berbasis agregasi data lowongan publik (LinkedIn, JobStreet, Glints, Glassdoor, data Kemenaker) + model AI (qwen3.7-flash via OpenRouter).</li>
+    <li>Merupakan <strong>rentang perkiraan median ± standar deviasi</strong> untuk peran, pengalaman, dan lokasi tertentu — <strong>bukan data real-time perusahaan tertentu</strong>.</li>
+    <li>Akurasi bergantung pada kelengkapan input (job title, lokasi, gaji ditawarkan). Data dianonimkan, tidak merepresentasikan seluruh pasar.</li>
+  </ul>
+
+  <h3>3. Analisis Risiko Klausul</h3>
+  <ul>
+    <li>Deteksi berbasis pola teks umum (PKWT auto-extend, all-in salary, probation tanpa KPI, penalti resign, konkurensi berlebihan).</li>
+    <li><strong>Bukan review hukum formal.</strong> Klausul legal butuh review advokat/perwakilan hukum sebelum ditandatangani.</li>
+  </ul>
+
+  <h3>4. Target Counter-Offer & Skrip Negosiasi</h3>
+  <ul>
+    <li>Angka target counter-offer = estimasi median pasar + buffer negosiasi standar (5–15%).</li>
+    <li>Skrip negosiasi (WhatsApp, Email formal, Fallback non-gaji) adalah <strong>template komunikasi</strong>, bukan jaminan berhasil.</li>
+    <li>Hasil negosiasi tergantung pada kebijakan HR, budget perusahaan, dan skill komunikasi user.</li>
+  </ul>
+
+  <h3>5. Tanggung Jawab Pengguna</h3>
+  <ul>
+    <li>Verifikasi angka simulasi dengan KPP / konsultan pajak / HR perusahaan sebelum keputusan finansial besar.</li>
+    <li>Konsultasikan klausul kontrak ke advokat sebelum menandatangani.</li>
+    <li>Gunakan output sebagai bahan pertimbangan, bukan keputusan final.</li>
+  </ul>
+
+  <h3>6. Batasan Tanggung Jawab GajiCVKita</h3>
+  <p>GajiCVKita (dan afiliasi CVKita) <strong>tidak bertanggung jawab</strong> atas:</p>
+  <ul>
+    <li>Kerusakan finansial / karier akibat mengandalkan output simulasi / analisis AI.</li>
+    <li>Ketidaksesuaian angka simulasi dengan realisasi gaji / slip gaji / SPT Tahunan.</li>
+    <li>Kegagalan negosiasi gaji atau sengketa hukum kontrak kerja.</li>
+    <li>Ketersediaan layanan (serverless free-tier, cold-start, limit KV 1.000 write/hari, rate-limit AI).</li>
+  </ul>
+
+  <h3>7. Referensi Regulasi</h3>
+  <ul>
+    <li><strong>PP 58/2023</strong> — Tarif PPh 21 TER.</li>
+    <li><strong>PMK 168/2023</strong> — Tata cara perhitungan PPh 21 TER.</li>
+    <li><strong>UU 36/2008 (sttd UU 7/2021)</strong> — PPh Pasal 17 Masa Pajak Desember (true-up).</li>
+    <li><strong>UU 24/2011</strong> — BPJS Ketenagakerjaan.</li>
+    <li><strong>UU 40/2004</strong> — BPJS Kesehatan.</li>
+    <li><strong>UU 27/2022</strong> — Perlindungan Data Pribadi (UU PDP).</li>
+  </ul>
+
+  <h3>8. Kontak</h3>
+  <p>Pertanyaan soal disclaimer: <a href="mailto:kode@cvkita.id">kode@cvkita.id</a>.</p>
+</main>
+<footer class="site-footer">
+  <p><a href="/">Kembali ke GajiCVKita</a> · <a href="privacy.html">Kebijakan Privasi</a> · <a href="terms.html">Syarat & Ketentuan</a></p>
+</footer>
+</body>
+</html>

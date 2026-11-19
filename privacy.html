@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kebijakan Privasi — GajiCVKita</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+<link rel="stylesheet" href="css/style.css?v=7">
+<style>
+  main{max-width:720px;margin:24px auto;padding:0 16px 48px}
+  h2{margin:26px 0 10px}
+  h3{margin:18px 0 8px}
+  p,li{line-height:1.75;color:#374151}
+  ul,ol{padding-left:22px;margin:10px 0}
+  li{margin-bottom:6px}
+  .update{font-size:.85rem;color:#4b5563}
+</style>
+</head>
+<body>
+<header class="topbar"><a class="logo" href="/" style="text-decoration:none;color:inherit">Gaji<span>CVKita</span></a></header>
+<main>
+  <h2>Kebijakan Privasi</h2>
+  <p class="update">Terakhir diperbarui: 19 November 2026</p>
+
+  <p>GajiCVKita (\"kami\") menghargai privasimu. Kebijakan ini menjelaskan data apa
+  yang kami (dan layanan pihak ketiga yang kami gunakan) proses saat kamu
+  memakai <strong>gaji.cvkita.id</strong>. Kami mengikuti prinsip <strong>UU Perlindungan Data Pribadi (UU PDP) Nomor 27 Tahun 2022</strong>.</p>
+
+  <h3>1. Data yang TIDAK kami kumpulkan atau simpan permanen</h3>
+  <ul>
+    <li><strong>Perhitungan gaji (Kalkulator, Adu Offering):</strong> Semua angka yang kamu masukkan (gaji pokok, tunjangan, PTKP, dll.) diproses <strong>sepenuhnya di browser kamu (client-side JavaScript)</strong>. Data ini <strong>tidak pernah dikirim ke server kami</strong>, tidak disimpan, dan tidak bisa diakses oleh kami.</li>
+    <li><strong>Cookie pelacakan milik sendiri:</strong> Kami tidak memasang cookie tracking sendiri.</li>
+    <li>Kami tidak menjual atau membagikan data pribadi apa pun.</li>
+  </ul>
+
+  <h3>2. Data yang diproses secara terbatas (legal basis: Legitimate Interest & Consent)</h3>
+  <ul>
+    <li><strong>Fitur AI Offer Analyzer (upload PDF / paste teks):</strong> Saat kamu memakai fitur ini, dokumen atau teks yang kamu kirim diproses <strong>sementara</strong> di server kami untuk:
+      <ul>
+        <li>Ekstraksi teks dari PDF (maks 3 MB, validasi magic-byte %PDF)</li>
+        <li>Analisis AI via OpenRouter (model qwen3.7-flash, <code>reasoning:{enabled:false}</code>)</li>
+      </ul>
+      <strong>Data ini TIDAK disimpan permanen di database kami</strong> (tidak ada KV write pada endpoint gratis /api/import-offer dan /api/ai/preview-offer) dan <strong>TIDAK dipakai untuk melatih model</strong>. Hasil analisis dikembalikan ke browser kamu dan bersifat session-only.
+    </li>
+    <li><strong>Statistik kunjungan anonim (HG tracking):</strong> Kami mencatat event anonim (page view, simulasi, perbandingan, analisis, pembayaran) secara agregat di Cloudflare Workers KV (namespace <code>hg:stat:daily:*</code>) tanpa nama, tanpa IP, tanpa profil pengguna — hanya counter harian untuk keperluan pengembangan produk dan metrik konversi.</li>
+    <li><strong>Pembayaran lisensi Pro:</strong> Jika kamu membeli upgrade Pro (Rp 29.000), pembayaran diproses oleh Midtrans (GoPay, Virtual Account, dll.). Kami hanya menerima konfirmasi status pembayaran dan menerbitkan kode lisensi <code>HG-XXXX-XXXX</code> — bukan detail kartu/rekeningmu. Data lisensi disimpan di KV namespace <code>hg:lic:*</code> dengan idempotency key.</li>
+    <li><strong>Formulir masukan & dukungan:</strong> Pesan yang kamu kirim lewat formulir kontak atau channel CS disimpan untuk ditindaklanjuti.</li>
+  </ul>
+
+  <h3>3. Pihak ketiga yang terlibat</h3>
+  <ul>
+    <li><strong>Cloudflare Workers & KV:</strong> Hosting serverless & penyimpanan counter anonim / lisensi. Lihat <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Kebijakan Privasi Cloudflare</a>.</li>
+    <li><strong>OpenRouter (AI):</strong> Penyedia akses model AI (qwen3.7-flash). Data prompt tidak disimpan OpenRouter untuk training. Lihat <a href="https://openrouter.ai/privacy" target="_blank" rel="noopener">Kebijakan Privasi OpenRouter</a>.</li>
+    <li><strong>Midtrans:</strong> Payment gateway. Lihat <a href="https://midtrans.com/privacy-policy" target="_blank" rel="noopener">Kebijakan Privasi Midtrans</a>.</li>
+    <li><strong>GitHub Pages:</strong> Hosting static assets. Lihat <a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement" target="_blank" rel="noopener">GitHub Privacy Statement</a>.</li>
+  </ul>
+
+  <h3>4. Hakmu (UU PDP)</h3>
+  <p>Sebagai Subjek Data Pribadi, kamu berhak:</p>
+  <ul>
+    <li>Mengakses data pribadi yang kami proses tentangmu.</li>
+    <li>Mengoreksi data yang tidak akurat.</li>
+    <li>Meminta penghapusan data (Right to be Forgotten) — untuk data lisensi & pembayaran, hubungi <a href="mailto:kode@cvkita.id">kode@cvkita.id</a>.</li>
+    <li>Membatasi pemrosesan & keberatan pemrosesan.</li>
+    <li>Portabilitas data.</li>
+  </ul>
+
+  <h3>5. Retensi Data</h3>
+  <ul>
+    <li>Data tracking anonim (hg:stat): dihapus otomatis setelah 90 hari (KV TTL / manual cleanup).</li>
+    <li>Data lisensi (hg:lic): disimpan selama lisensi aktif + 2 tahun untuk keperluan audit & dukungan.</li>
+    <li>Log pembayaran Midtrans: mengikuti kebijakan retensi Midtrans.</li>
+  </ul>
+
+  <h3>6. Keamanan</h3>
+  <p>Kami menerapkan HTTPS (TLS 1.3 via Cloudflare), validasi input ketat (magic-byte PDF, sanitasi teks), CSP header, dan batas rate-limit pada endpoint AI. Endpoint gratis dilarang menulis KV (proteksi kuota 1.000 write/hari).</p>
+
+  <h3>7. Perubahan Kebijakan</h3>
+  <p>Setiap perubahan materiil akan diberitahu via banner di halaman utama atau email (jika kamu punya lisensi aktif). Terakhir diperbarui: <strong>19 November 2026</strong>.</p>
+
+  <h3>8. Kontak</h3>
+  <p>Pertanyaan soal privasi: <a href="mailto:kode@cvkita.id">kode@cvkita.id</a>.</p>
+</main>
+<footer class="site-footer">
+  <p><a href="/">Kembali ke GajiCVKita</a> · <a href="terms.html">Syarat & Ketentuan</a> · <a href="disclaimer.html">Disclaimer</a></p>
+</footer>
+</body>
+</html>

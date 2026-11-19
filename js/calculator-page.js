@@ -108,4 +108,16 @@ function bind() {
 
 bind();
 
+  // HG-010: Preset buttons (UMR Jakarta / Gaji 12 Juta)
+  document.querySelectorAll('[data-preset]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const val = btn.getAttribute('data-preset');
+      const gajiEl = document.getElementById('gaji-pokok');
+      gajiEl.value = fmt(Number(val));
+      // trigger formatter to show formatted
+      gajiEl.dispatchEvent(new Event('input'));
+      document.getElementById('form-gaji').dispatchEvent(new Event('submit'));
+    });
+  });
+
 hgTrack('hg_visit'); // HG-009: beacon kunjungan halaman kalkulator
