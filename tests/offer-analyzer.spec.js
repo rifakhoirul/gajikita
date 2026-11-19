@@ -48,6 +48,7 @@ test.describe('Offer Analyzer', () => {
     await page.fill('#offer-teks', 'Gaji pokok Rp 6.000.000, masa percobaan 3 bulan, tanpa THR.');
     await page.fill('#job-title', 'Staff Accounting');
     await page.fill('#offered-salary', '6000000');
+    await page.check('#pdp-consent');
     await page.click('#btn-analyze');
     const teaser = page.locator('#teaser');
     await expect(teaser).toBeVisible();
@@ -78,6 +79,7 @@ test.describe('Offer Analyzer', () => {
     let calledPreview = false;
     await mockApi(page, { previewOffer: (route, json) => { calledPreview = true; return json({}); } });
     await page.goto('/offer-analyzer.html');
+    await page.check('#pdp-consent');
     await page.click('#btn-analyze');
     await expect(page.locator('#analyzer-error')).toBeVisible();
     expect(calledPreview).toBe(false);
@@ -92,6 +94,7 @@ test.describe('Offer Analyzer', () => {
     await page.fill('#offer-teks', 'Gaji pokok Rp 6.000.000.');
     await page.fill('#job-title', 'Staff Accounting');
     await page.fill('#offered-salary', '6000000');
+    await page.check('#pdp-consent');
     await page.click('#btn-analyze');
     await page.click('#btn-full-analysis');
     const penuh = page.locator('#hasil-penuh');

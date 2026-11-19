@@ -74,9 +74,10 @@ test.describe('HG-010.2 Privasi & halaman legal', () => {
 });
 
 test.describe('HG-010.3 UX & Konversi', () => {
-  test('CTA hero jadi anchor #kalkulator & <title> memuat Tahun 2026', async ({ page }) => {
+  test('CTA hero dihapus (HG-013 polish) & <title> memuat Tahun 2026', async ({ page }) => {
     await page.goto(INDEX);
-    await expect(page.locator('.hero-cta a.btn-primary')).toHaveAttribute('href', '#kalkulator');
+    await expect(page.locator('.hero-cta')).toHaveCount(0);
+    await expect(page.locator('#kalkulator')).toBeVisible();
     await expect(page).toHaveTitle(/Tahun 2026/);
   });
 

@@ -26,6 +26,7 @@ test('compare.html live: dua offer → pemenang tampil', async ({ page }) => {
 test('offer-analyzer live: teaser gratis (API AI asli)', async ({ page }) => {
   await page.goto(BASE + '/offer-analyzer.html');
   await page.fill('#offer-teks', 'Offering letter: Staff Accounting, gaji pokok Rp 6.000.000 per bulan, BPJS Kesehatan kelas 1, masa percobaan 3 bulan.');
+  await page.check('#pdp-consent');
   await page.click('#btn-analyze');
   await expect(page.locator('#teaser')).toBeVisible({ timeout: 30000 });
   await expect(page.locator('#teaser-verdict')).not.toBeEmpty();
