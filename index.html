@@ -6,7 +6,7 @@
   <title>GajiCVKita — Simulator Gaji Bersih PPh 21 TER Tahun 2026</title>
   <meta name="description" content="Hitung take-home pay kamu dengan tarif PPh 21 TER (PP 58/2023), potongan BPJS Kesehatan & Ketenagakerjaan, bandingkan dua offering kerja, dan negosiasi gaji pakai AI. Gratis.">
   <link rel="canonical" href="https://gaji.cvkita.id/">
-  <link rel="stylesheet" href="css/style.css?v=8">
+  <link rel="stylesheet" href="css/style.css?v=9">
 </head>
 <body>
   <header class="site-header">
@@ -80,7 +80,26 @@
           </div>
         </div>
         <p class="catatan">Tarif PPh 21 mengikuti metode TER (PP 58/2023) masa pajak Jan–Nov. Desember direkonsiliasi pemberi kerja dengan tarif progresif — angka setahun bisa sedikit berbeda.</p>
-      </section>
+
+      <div class="hasil-actions" style="margin-top:16px; display:flex; gap:12px; flex-wrap:wrap;">
+        <button type="button" class="btn btn-secondary" data-action="go-compare">
+          Bandingkan dengan Offer Lain →
+        </button>
+        <button type="button" class="btn btn-secondary" data-action="go-offer-analyzer">
+          Cek Apakah Gaji Ini Underpaid →
+        </button>
+      </div>
+
+      <div class="catatan-asumsi" data-asumsi style="margin-top:16px; padding:12px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; font-size:13px; line-height:1.7; color:#374151;">
+        <strong>Asumsi perhitungan:</strong>
+        <ul style="margin:8px 0 0 0; padding-left:20px;">
+          <li>Karyawan <strong>pegawai tetap</strong> dengan penghasilan teratur bulanan.</li>
+          <li>BPJS Kesehatan 1% (cap Rp 12.000.000), JHT 2%, JP 1% (cap Rp 11.086.300 per 2026).</li>
+          <li>THR & Bonus: pajak dihitung pada <strong>bulan diterima</strong> (bruto bulan tsb = gaji bulanan + THR/bonus) sesuai ketentuan PPh 21 TER.</li>
+          <li>Proyeksi tahunan ini <strong>belum termasuk true-up</strong> Masa Pajak Desember (Pasal 17) — angka aktual direkonsiliasi pemberi kerja akhir tahun.</li>
+        </ul>
+      </div>
+    </section>
     </section>
 
     <section class="features">
@@ -109,6 +128,6 @@
     </p>
   </footer>
 
-  <script type="module" src="js/calculator-page.js?v=8"></script>
+  <script type="module" src="js/calculator-page.js?v=9"></script>
 </body>
 </html>
