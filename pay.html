@@ -6,7 +6,7 @@
   <title>Checkout Pro — Buka Analisis Lengkap | GajiCVKita</title>
   <meta name="description" content="Sekali bayar Rp 29.000: 5x analisis lengkap offering letter — benchmark gaji pasar, risiko klausul, target counter-offer, dan 3 skrip negosiasi siap kirim.">
   <link rel="canonical" href="https://gaji.cvkita.id/pay.html">
-  <link rel="stylesheet" href="css/style.css?v=4">
+  <link rel="stylesheet" href="css/style.css?v=5">
   <script src="https://app.midtrans.com/snap/snap.js"
           data-client-key="Mid-client-JC5qOJTb6L0NNrp8"></script>
 </head>
@@ -44,8 +44,12 @@
         <section id="lic-result" class="hasil" hidden>
           <p class="hasil-label">Kode lisensi kamu:</p>
           <p id="lic-code" class="hasil-angka">—</p>
+          <div class="lic-actions">
+            <button id="btn-copy" type="button" class="btn btn-secondary">Salin kode</button>
+          </div>
           <p class="hint">Simpan kode ini — juga kami kirim ke email kamu. Gunakan di halaman <a href="offer-analyzer.html">Offer Analyzer</a>.</p>
         </section>
+        <div id="copy-toast" class="copy-toast" hidden>Tersalin!</div>
         <noscript><p class="form-error">Aktifkan JavaScript untuk melakukan pembayaran.</p></noscript>
       </div>
       <p class="catatan">Pembayaran diproses aman oleh Midtrans. Ada kendala? Chat kami via <a href="https://wa.me/62895628135638" target="_blank" rel="noopener">WhatsApp</a>.</p>
@@ -56,6 +60,6 @@
     <p>Dari <a href="https://cvkita.id">CVKita</a> — CV builder gratis untuk fresh graduate Indonesia.</p>
   </footer>
 
-  <script type="module" src="js/pay-page.js?v=4"></script>
+  <script type="module" src="js/pay-page.js?v=5"></script>
 </body>
 </html>
