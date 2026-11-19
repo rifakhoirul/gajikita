@@ -11,8 +11,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
   <!-- Design System v1.1 + Legacy style.css -->
-  <link rel="stylesheet" href="css/design-system.css?v=13">
-  <link rel="stylesheet" href="css/style.css?v=13">
+  <link rel="stylesheet" href="css/design-system.css?v=14">
+  <link rel="stylesheet" href="css/style.css?v=14">
 </head>
 <body>
   <!-- Compact Sticky Header + Segmented Navigation -->
@@ -43,6 +43,7 @@
           <label for="offer-pdf" class="form-label">Upload Offering Letter (PDF, maks 3 MB)</label>
           <div class="dropzone">
             <input id="offer-pdf" type="file" accept="application/pdf,.pdf">
+            <span class="dropzone-hint">Klik untuk pilih file PDF offering letter</span>
           </div>
         </div>
 
@@ -95,7 +96,7 @@
             <span class="paywall-badge">Pro</span>
             <p class="paywall-title">Buka hasil lengkap</p>
             <p class="paywall-desc">Estimasi Rentang Pasar, deteksi risiko klausul kontrak, target angka counter-offer, dan <strong>3 skrip negosiasi siap kirim</strong> (WhatsApp, Email, Fallback non-gaji).</p>
-            <a class="btn-primary btn-unlock-pro" href="pay.html?amount=29000">Buka Analisis Lengkap — Rp 29.000</a>
+            <a class="btn-primary btn-unlock-pro" href="pay.html?amount=29000">Buka Analisis Lengkap — Rp&nbsp;29.000</a>
           </div>
         </div>
 
@@ -109,7 +110,7 @@
           <p style="margin:0; font-size:13px; color:#a16207;"><em>Data dianonimkan. Analisis asli dibuka setelah upgrade Pro.</em></p>
         </div>
 
-        <p class="hint">Sudah punya kode lisensi? Masukkan di bawah — gratis, tidak dipotong kuota.</p>
+        <p class="hint">Sudah punya kode akses Pro (HG-XXXX-XXXX)? Masukkan di bawah untuk mengaktifkan kuota analisismu.</p>
         <p class="license-hint" style="font-size:13px; color:#6b7280;">Format kode: <code>HG-XXXX-XXXX</code> (kirim ke email setelah pembayaran)</p>
         <div class="lic-row">
           <input id="lic-input" type="text" placeholder="Kode lisensi (HG-XXXX-XXXX)">
@@ -175,6 +176,6 @@
     </div>
   </footer>
 
-  <script type="module" src="js/offer-analyzer-page.js?v=13"></script>
+  <script type="module" src="js/offer-analyzer-page.js?v=14"></script>
 </body>
 </html>
