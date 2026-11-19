@@ -2,6 +2,7 @@
 // Prinsip PRD: teaser gratis via /api/ai/preview-offer (0 KV), hasil penuh via
 // /api/ai/negotiate (kuota), lisensi di localStorage TTL 5 menit (PRD 3.4.3).
 const API = 'https://cvkita-api.cvkita-rifakhoirul.workers.dev';
+import { hgTrack } from './hg-track.js';
 
 const LIC_KEY = 'hg_lic';
 const LIC_TTL_MS = 5 * 60 * 1000; // PRD 3.4.3: cache lisensi 5 menit
@@ -149,6 +150,7 @@ function bind() {
         return;
       }
       renderTeaser(r.data);
+      hgTrack('hg_analyze'); // HG-009: beacon analisis gratis sukses
     } catch {
       showError('analyzer-error', 'Koneksi bermasalah. Coba lagi.');
     } finally {

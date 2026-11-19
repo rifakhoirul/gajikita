@@ -1,6 +1,7 @@
 // GajiCVKita — logic halaman Checkout (HG-006). Mengikuti pola pay.html CVKita:
 // /api/pay/create (amount 29000) -> snap.pay(token) -> onSuccess -> by-order -> licKey.
 const API = 'https://cvkita-api.cvkita-rifakhoirul.workers.dev';
+import { hgTrack } from './hg-track.js';
 const AMOUNT = 29000; // paket Offer Analyzer Pro (5 kuota) — dikunci server-side
 
 const LIC_KEY = 'hg_lic';
@@ -117,3 +118,5 @@ if (btnCopy) {
     showToast('Tersalin!');
   });
 }
+
+hgTrack('hg_pay_view'); // HG-009: beacon halaman checkout dilihat

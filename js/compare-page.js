@@ -1,5 +1,6 @@
 // GajiCVKita — logic halaman Adu Offering (HG-005). 100% client-side.
 import GajiCalc from './ter-calculator.js';
+import { hgTrack } from './hg-track.js';
 
 function fmt(n) {
   return 'Rp ' + Math.round(n).toLocaleString('id-ID');
@@ -65,6 +66,7 @@ function bind() {
       const a = Object.assign(GajiCalc.bandingkanOffer(bacaOffer('a')), { skema: document.getElementById('a-skema').value });
       const b = Object.assign(GajiCalc.bandingkanOffer(bacaOffer('b')), { skema: document.getElementById('b-skema').value });
       const { winner, selisih } = GajiCalc.bandingkanDuaOffer(a, b);
+      hgTrack('hg_compare_view'); // HG-009: beacon perbandingan sukses
 
       const line = document.getElementById('winner-line');
       if (winner === 'SERI') {

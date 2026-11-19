@@ -1,5 +1,6 @@
 // GajiCVKita — logic halaman Kalkulator (HG-005). UI-only; kalkulasi di ter-calculator.js.
 import GajiCalc from './ter-calculator.js';
+import { hgTrack } from './hg-track.js';
 
 function fmt(n) {
   return 'Rp ' + Math.round(n).toLocaleString('id-ID');
@@ -79,6 +80,7 @@ function bind() {
     };
     try {
       render(GajiCalc.hitungGaji(input));
+      hgTrack('hg_sim'); // HG-009: beacon simulasi sukses
     } catch (ex) {
       err.textContent = ex && ex.message ? ex.message : 'Input tidak valid.';
       err.hidden = false;
@@ -105,3 +107,5 @@ function bind() {
 }
 
 bind();
+
+hgTrack('hg_visit'); // HG-009: beacon kunjungan halaman kalkulator
