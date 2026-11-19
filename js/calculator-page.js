@@ -121,3 +121,37 @@ bind();
   });
 
 hgTrack('hg_visit'); // HG-009: beacon kunjungan halaman kalkulator
+
+  // HG-011: Connected Journey buttons
+  const hasilSection = document.getElementById('hasil');
+  function setupJourneyButtons() {
+    const btnCompare = document.querySelector('[data-action="go-compare"]');
+    const btnOffer = document.querySelector('[data-action="go-offer-analyzer"]');
+    if (!btnCompare || !btnOffer) return;
+
+    btnCompare.addEventListener('click', () => {
+      const gaji = document.getElementById('gaji-pokok').value.replace(/\D/g, '');
+      const ptkp = document.getElementById('ptkp').value;
+      if (!gaji) return;
+      const url = new URL('compare.html', window.location.origin);
+      url.searchParams.set('gaji', gaji);
+      url.searchParams.set('ptkp', ptkp);
+      window.location.href = url.toString();
+    });
+
+    btnOffer.addEventListener('click', () => {
+      window.location.href = 'offer-analyzer.html';
+    });
+  }
+
+  // Observe hasil section visibility to setup buttons after render
+  const observer = new MutationObserver((mutations) => {
+    for (const m of mutations) {
+      if (m.target.id === 'hasil' && !m.target.hidden) {
+        setupJourneyButtons();
+        observer.disconnect();
+        break;
+      }
+    }
+  });
+  observer.observe(hasilSection, { attributes: true, attributeFilter: ['hidden'] });

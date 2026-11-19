@@ -89,3 +89,15 @@ function bind() {
 }
 
 bind();
+
+  // HG-011: Prefill dari URL query params (?gaji=...&ptkp=...)
+  const params = new URLSearchParams(window.location.search);
+  const gajiParam = params.get('gaji');
+  const ptkpParam = params.get('ptkp');
+  if (gajiParam && GajiCalc.parseRupiah(gajiParam) > 0) {
+    document.getElementById('a-gaji').value = fmt(GajiCalc.parseRupiah(gajiParam));
+    document.getElementById('a-gaji').dispatchEvent(new Event('input'));
+    if (ptkpParam && document.getElementById('a-ptkp').querySelector('option[value="' + ptkpParam + '"]')) {
+      document.getElementById('a-ptkp').value = ptkpParam;
+    }
+  }

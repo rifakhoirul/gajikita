@@ -156,15 +156,31 @@ function hitungGaji(input) {
   return { totalBruto, kategori, tarifTer: terRate(kategori, totalBruto), potongan, thp };
 }
 
-// PRD 3.2.1: Total Annual Net = THP x12 + THR + Bonus + Manfaat bulanan x12
-//                            - Komuter bulanan x12 (pengurang nilai efektif).
+// PRD 3.2.1: Total Annual Net = THP x12 + netTHR + netBonus + Manfaat bulanan x12
+ //                            - Komuter bulanan x12 (pengurang nilai efektif).
+ // THR & Bonus pajak dihitung di bulan penerimaan:
+ //   bruto_bulan_ini = bruto_bulanan + THR (atau bonus)
+ //   pajak_bulan_ini = TER(bruto_bulan_ini)
+ //   pajak_normal = TER(bruto_bulanan)
+ //   netTHR = THR - (pajak_bulan_ini - pajak_normal)
+ function hitungNetTambahan(brutoBulanan, tambahan, kategori) {
+   if (!tambahan || tambahan <= 0) return 0;
+   const pajakNormal = hitungTer(kategori, brutoBulanan);
+   const pajakDenganTambahan = hitungTer(kategori, brutoBulanan + tambahan);
+   return tambahan - (pajakDenganTambahan - pajakNormal);
+ }
+
 function bandingkanOffer(input) {
   const hasil = hitungGaji(input);
   const thr = parseRupiah(input.thr) || 0;
   const bonusTahunan = parseRupiah(input.bonusTahunan) || 0;
   const manfaatBulanan = parseRupiah(input.manfaatBulanan) || 0;
   const komuterBulanan = parseRupiah(input.komuterBulanan) || 0;
-  const totalAnnualNet = hasil.thp * 12 + thr + bonusTahunan
+
+  const netThr = hitungNetTambahan(hasil.totalBruto, thr, hasil.kategori);
+  const netBonus = hitungNetTambahan(hasil.totalBruto, bonusTahunan, hasil.kategori);
+
+  const totalAnnualNet = hasil.thp * 12 + netThr + netBonus
     + manfaatBulanan * 12 - komuterBulanan * 12;
   return Object.assign(hasil, { thr, bonusTahunan, manfaatBulanan, komuterBulanan, totalAnnualNet });
 }
@@ -184,6 +200,7 @@ const api = {
   bpjsKesehatan, jht, jp,
   parseRupiah,
   hitungGaji, bandingkanOffer, bandingkanDuaOffer,
+  hitungNetTambahan,
 };
 
 export function loadModule() { return api; }

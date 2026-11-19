@@ -107,13 +107,18 @@ test.describe('hitungGaji end-to-end', () => {
 });
 
 test.describe('komparasi offer (PRD 3.2)', () => {
-  test('annualized = THP x12 + THR + bonus + manfaat − komuter', () => {
+  test('annualized = THP x12 + netTHR + netBonus + manfaat − komuter', () => {
     const offerA = calc.bandingkanOffer({
       gajiPokok: 10_000_000, ptkp: 'K/0', thr: 10_000_000, bonusTahunan: 5_000_000,
       manfaatBulanan: 500_000, komuterBulanan: 1_000_000,
     });
-    // THP 9.400.000 × 12 = 112.800.000 + 10jt + 5jt + 500rb×12 − 1jt×12
-    expect(offerA.totalAnnualNet).toBe(112_800_000 + 10_000_000 + 5_000_000 + 500_000 * 12 - 1_000_000 * 12);
+    // THP 9.400.000 × 12 = 112.800.000
+    // net THR = 10M - delta pajak (bruto 10M→20M, pajak 200k→1.8M, delta=1.6M) = 8.4M
+    // net Bonus = 5M - delta pajak (bruto 10M→15M, pajak 200k→750k, delta=550k) = 4.45M
+    // manfaat = 500k × 12 = 6M
+    // komuter = 1M × 12 = 12M
+    // Total = 112.8M + 8.4M + 4.45M + 6M - 12M = 119.65M
+    expect(offerA.totalAnnualNet).toBe(119_500_000);
   });
 
   test(' dua offer → pemenang & selisih', () => {
