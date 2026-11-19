@@ -56,6 +56,14 @@ function renderTeaser(d) {
   document.getElementById('teaser-verdict').textContent =
     d.verdict_label || VERDICT_LABEL[d.verdict] || d.verdict || '—';
   document.getElementById('teaser-gap-text').textContent = d.gap || '—';
+  // UI-006 (audit): locked preview — nilai premium terlihat "ada" tapi terblur,
+  // bukti visual produk sebelum bayar (pattern paywall Figma/Notion).
+  const pw = document.getElementById('locked-preview');
+  if (pw && !pw.hasChildNodes()) {
+    const mk = (label) =>
+      '<div class="locked-cell"><span>' + label + '</span><strong class="locked-value">████ ███</strong></div>';
+    pw.innerHTML = mk('Median pasar') + mk('Target counter-offer') + mk('Skrip negosiasi WA/Email');
+  }
   document.getElementById('teaser').hidden = false;
   document.getElementById('teaser').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }

@@ -45,6 +45,21 @@ function bind() {
   const err = document.getElementById('compare-error');
   if (!form) return;
 
+  // UI-002 (audit): formatter ribuan di semua input rupiah kedua kolom.
+  const fmtIds = ['gaji', 'tetap', 'thr', 'bonus', 'manfaat', 'komuter'];
+  const pasang = (el) => {
+    if (!el) return;
+    el.addEventListener('focus', () => {
+      const n = GajiCalc.parseRupiah(el.value);
+      el.value = Number.isFinite(n) && n > 0 ? String(Math.round(n)) : '';
+    });
+    el.addEventListener('blur', () => {
+      const n = GajiCalc.parseRupiah(el.value);
+      el.value = Number.isFinite(n) && n > 0 ? fmt(n) : '';
+    });
+  };
+  fmtIds.forEach((f) => { pasang(document.getElementById('a-' + f)); pasang(document.getElementById('b-' + f)); });
+
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     err.hidden = true;

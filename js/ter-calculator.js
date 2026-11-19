@@ -7,6 +7,28 @@
 
 'use strict';
 
+// UI-002 (audit): parser toleran untuk input terformat — "Rp 10.000.000",
+// "10.000.000", "10,5 jt"-style koma desimal id-ID, atau angka mentah "10000000".
+// Koma = desimal id-ID; titik = pemisah ribuan; spasi/Rp/$ diabaikan.
+function parseRupiah(raw) {
+  if (typeof raw === 'number') return raw;
+  if (raw == null) return NaN;
+  let s = String(raw).trim().replace(/[Rp$\s]/gi, '');
+  if (s === '') return NaN;
+  const hasDot = s.includes('.');
+  const hasComma = s.includes(',');
+  if (hasDot && hasComma) {
+    // pemisah ribuan = tanda yang muncul terakhir sebelum digit desimal
+    if (s.lastIndexOf('.') > s.lastIndexOf(',')) s = s.replace(/,/g, '');
+    else s = s.replace(/\./g, '').replace(',', '.');
+  } else if (hasComma) {
+    // koma tunggal diikuti <=2 digit → desimal; lainnya → pemisah ribuan
+    if (/,\d{1,2}$/.test(s)) s = s.replace(',', '.');
+    else s = s.replace(/,/g, '');
+  }
+  return Number(s);
+}
+
 // [batas-atas-bracket, tarif] — bracket terakhir Infinity.
 const TER_TABLE = {
   A: [
@@ -99,7 +121,7 @@ function validasiInput(input) {
   if (raw === '' || raw == null) {
     throw new Error('Gaji pokok wajib diisi');
   }
-  const gaji = Number(raw);
+  const gaji = parseRupiah(raw);
   if (!Number.isFinite(gaji) || gaji < 0) {
     throw new Error('Gaji pokok harus angka >= 0');
   }
@@ -112,8 +134,8 @@ function validasiInput(input) {
 // PPh 21 TER = bruto x tarif TER kategori.
 function hitungGaji(input) {
   const gaji = validasiInput(input);
-  const tunjanganTetap = Number(input.tunjanganTetap) || 0;
-  const tunjanganLain = Number(input.tunjanganLain) || 0;
+  const tunjanganTetap = parseRupiah(input.tunjanganTetap) || 0;
+  const tunjanganLain = parseRupiah(input.tunjanganLain) || 0;
   if (tunjanganTetap < 0 || tunjanganLain < 0) {
     throw new Error('Tunjangan tidak boleh negatif');
   }
@@ -134,10 +156,10 @@ function hitungGaji(input) {
 //                            - Komuter bulanan x12 (pengurang nilai efektif).
 function bandingkanOffer(input) {
   const hasil = hitungGaji(input);
-  const thr = Number(input.thr) || 0;
-  const bonusTahunan = Number(input.bonusTahunan) || 0;
-  const manfaatBulanan = Number(input.manfaatBulanan) || 0;
-  const komuterBulanan = Number(input.komuterBulanan) || 0;
+  const thr = parseRupiah(input.thr) || 0;
+  const bonusTahunan = parseRupiah(input.bonusTahunan) || 0;
+  const manfaatBulanan = parseRupiah(input.manfaatBulanan) || 0;
+  const komuterBulanan = parseRupiah(input.komuterBulanan) || 0;
   const totalAnnualNet = hasil.thp * 12 + thr + bonusTahunan
     + manfaatBulanan * 12 - komuterBulanan * 12;
   return Object.assign(hasil, { thr, bonusTahunan, manfaatBulanan, komuterBulanan, totalAnnualNet });
@@ -156,6 +178,7 @@ const api = {
   TER_TABLE, KATEGORI_MAP, BPJS_KES_CAP, JP_CAP,
   kategoriFromPtkp, terRate, hitungTer,
   bpjsKesehatan, jht, jp,
+  parseRupiah,
   hitungGaji, bandingkanOffer, bandingkanDuaOffer,
 };
 

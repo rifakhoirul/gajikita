@@ -103,18 +103,38 @@ main { max-width: 960px; margin: 0 auto; padding: 24px 20px 48px; }
 #form-gaji input, #form-gaji select,
 .offer-col input, .offer-col select {
   width: 100%;
-  padding: 10px 12px;
+  padding: 12px 14px;
   border: 1px solid var(--line);
   border-radius: 10px;
   font-size: 1rem;
   background: #fff;
+  min-height: 48px; /* UI-001: tap target >= 44px */
+  box-sizing: border-box;
+}
+/* UI-002: format ribuan — sembunyikan spinner number agar format terlihat rapi */
+#form-gaji input[type="number"]::-webkit-outer-spin-button,
+#form-gaji input[type="number"]::-webkit-inner-spin-button,
+.offer-col input[type="number"]::-webkit-outer-spin-button,
+.offer-col input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+#form-gaji input[type="number"], .offer-col input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
 }
 #form-gaji input:focus, #form-gaji select:focus,
 .offer-col input:focus, .offer-col select:focus {
   outline: 2px solid var(--brand);
   border-color: var(--brand);
 }
-#form-gaji .btn { margin-top: 16px; width: 100%; border: 0; cursor: pointer; }
+#form-gaji .btn, #form-compare .btn {
+  margin-top: 16px;
+  width: 100%;
+  border: 0;
+  cursor: pointer;
+  min-height: 48px; /* UI-001 */
+}
 
 .form-error {
   color: #b91c1c;
@@ -255,6 +275,24 @@ textarea#offer-teks:focus { outline: 2px solid var(--brand); border-color: var(-
   background: #f8fafc;
 }
 .paywall p { margin: 0 0 12px; }
+/* UI-006: preview nilai terkunci — membuat nilai premium terlihat "ada" tanpa terbaca */
+.locked-preview {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 0 0 12px;
+}
+.locked-preview .locked {
+  background: #eef2f7;
+  border-radius: 8px;
+  padding: 8px 10px;
+  filter: blur(5px);
+  user-select: none;
+  pointer-events: none;
+  font-weight: 700;
+  color: #475569;
+  text-align: center;
+}
 .lic-row { display: flex; gap: 8px; flex-wrap: wrap; }
 .lic-row input {
   flex: 1;
@@ -314,5 +352,25 @@ textarea#offer-teks:focus { outline: 2px solid var(--brand); border-color: var(-
 .tier-list { list-style: none; text-align: left; margin: 0 auto 18px; max-width: 460px; padding: 0; }
 .tier-list li { padding: 6px 0; border-bottom: 1px dashed var(--line); font-size: 0.95rem; }
 .tier-list li:last-child { border-bottom: 0; }
-#btn-buy { width: 100%; max-width: 460px; border: 0; cursor: pointer; }
+#btn-buy { width: 100%; max-width: 460px; border: 0; cursor: pointer; min-height: 48px; }
+
+/* UI-007: toast copy kode lisensi */
+.copy-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%) translateY(8px);
+  background: #059669;
+  color: #fff;
+  border-radius: 999px;
+  padding: 10px 18px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  box-shadow: 0 6px 18px rgba(5, 150, 105, 0.35);
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 60;
+  pointer-events: none;
+}
+.copy-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 #pay-status { min-height: 1.4em; font-size: 0.95rem; }

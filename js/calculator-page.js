@@ -5,6 +5,22 @@ function fmt(n) {
   return 'Rp ' + Math.round(n).toLocaleString('id-ID');
 }
 
+// UI-002 (audit): format ribuan live "10000000" → "Rp 10.000.000" saat blur;
+// saat fokus kembali ke angka mentah agar edit mudah (pola wallet/pricing apps).
+function angkaMentah(v) {
+  const n = GajiCalc.parseRupiah(v);
+  return Number.isFinite(n) && n > 0 ? String(Math.round(n)) : '';
+}
+function pasangFormatter(el) {
+  if (!el) return;
+  el.setAttribute('inputmode', 'numeric');
+  el.addEventListener('focus', () => { el.value = angkaMentah(el.value); });
+  el.addEventListener('blur', () => {
+    const n = GajiCalc.parseRupiah(el.value);
+    el.value = Number.isFinite(n) && n > 0 ? fmt(n) : '';
+  });
+}
+
 function donutSvg(persenBersih) {
   // Lingkaran penuh 120x120, radius 45, keliling ~282.74.
   const C = 2 * Math.PI * 45;
@@ -50,6 +66,19 @@ function bind() {
   const form = document.getElementById('form-gaji');
   const err = document.getElementById('form-error');
   if (!form) return;
+  // UI-002: formatter ribuan pada semua input rupiah
+  ['gaji-pokok', 'tunjangan-tetap', 'tunjangan-lain'].forEach((id) => pasangFormatter(document.getElementById(id)));
+  // UI-008 (audit): prefill dari CTA halaman simulasi SSR (?gaji=…&ptkp=…)
+  const params = new URLSearchParams(window.location.search);
+  const gajiParam = params.get('gaji');
+  if (gajiParam && GajiCalc.parseRupiah(gajiParam) > 0) {
+    document.getElementById('gaji-pokok').value = fmt(GajiCalc.parseRupiah(gajiParam));
+    const ptkpParam = params.get('ptkp');
+    if (ptkpParam && document.getElementById('ptkp').querySelector('option[value="' + ptkpParam + '"]')) {
+      document.getElementById('ptkp').value = ptkpParam;
+    }
+    form.requestSubmit();
+  }
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     err.hidden = true;

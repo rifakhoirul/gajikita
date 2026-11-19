@@ -85,3 +85,35 @@ function beli() {
 
 const btn = document.getElementById('btn-buy');
 if (btn) btn.addEventListener('click', beli);
+
+// UI-007 (audit): tombol salin kode lisensi + toast konfirmasi.
+function toast(msg) {
+  const t = document.createElement('div');
+  t.className = 'copy-toast';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 2200);
+}
+
+const btnCopy = document.getElementById('btn-copy');
+if (btnCopy) {
+  btnCopy.addEventListener('click', async () => {
+    const kode = (document.getElementById('lic-code').textContent || '').trim();
+    if (!kode || kode === '—') return;
+    try {
+      await navigator.clipboard.writeText(kode);
+      toast('Kode lisensi disalin');
+    } catch {
+      // Fallback: browser tanpa izin clipboard (http / iframe ketat).
+      const ta = document.createElement('textarea');
+      ta.value = kode;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      ta.remove();
+      toast('Kode lisensi disalin');
+    }
+  });
+}
