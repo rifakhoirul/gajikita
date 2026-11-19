@@ -11,15 +11,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
   <!-- Design System v1.1 + Legacy style.css -->
-  <link rel="stylesheet" href="css/design-system.css?v=11">
-  <link rel="stylesheet" href="css/style.css?v=11">
+  <link rel="stylesheet" href="css/design-system.css?v=12">
+  <link rel="stylesheet" href="css/style.css?v=12">
 </head>
 <body>
   <!-- Compact Sticky Header + Segmented Navigation -->
   <header class="app-header">
     <div class="header-inner">
       <div class="brand-row">
-        <a href="/" class="brand-logo">Gaji<span>CVKita</span></a>
+        <a href="/" class="brand brand-logo">Gaji<span>CVKita</span></a>
         <span class="brand-badge">v1.1 TERBARU</span>
       </div>
       <nav class="segmented-nav" id="mainNav">
@@ -33,15 +33,16 @@
   <main>
     <!-- Compact Left-Aligned Hero -->
     <section class="hero-compact">
-      <h1 id="pageTitle">Kalkulator Gaji Bersih (THP)</h1>
+      <h1 id="pageTitle">Berapa sih gaji bersih kamu sebenarnya?</h1>
       <p id="pageSubtitle">Hitung potongan PPh 21 TER 2026 (PP 58/2023 & PMK 168/2023) & BPJS secara akurat.</p>
+      <p class="hero-cta"><a class="btn btn-primary" href="#kalkulator">Buka Kalkulator</a></p>
     </section>
 
     <!-- Preset Quick-Fill Chips -->
     <div class="preset-bar">
       <span class="preset-label">Preset:</span>
       <button type="button" class="preset-chip" data-preset="5729876" id="preset5m">UMR Jakarta</button>
-      <button type="button" class="preset-chip" data-preset="10000000" id="preset10m">10 Jt</button>
+      <button type="button" class="preset-chip" data-preset="12000000" id="preset12m">12 Jt</button>
       <button type="button" class="preset-chip" data-preset="15000000" id="preset15m">15 Jt</button>
       <button type="button" class="preset-chip" data-preset="25000000" id="preset25m">25 Jt</button>
     </div>
@@ -101,37 +102,21 @@
       <!-- Hasil: Result Card -->
       <section id="hasil" class="result-card" hidden data-testid="result-container">
         <div class="result-hero-box">
-          <div class="label">Take-Home Pay (Gaji Bersih)</div>
-          <div class="amount" id="thpDisplay" data-testid="thp-display">—</div>
-          <div class="subtext">Diterima setiap bulan setelah pajak & BPJS</div>
+          <div class="label">Take-Home Pay / bulan</div>
+          <div class="amount" id="thp" data-testid="thp-display">—</div>
+          <div class="subtext">Proyeksi setahun: <strong id="thp-tahunan">—</strong></div>
         </div>
 
-        <div class="breakdown-list">
-          <div class="breakdown-row">
-            <span>Gaji Kotor (Gross)</span>
-            <span class="val" id="grossDisplay">—</span>
+        <div class="hasil-grid">
+          <div class="rincian">
+            <h3>Rincian Potongan</h3>
+            <ul id="rincian-potongan"></ul>
           </div>
-          <div class="breakdown-row deduction">
-            <span>Potongan PPh 21 TER</span>
-            <span class="val" id="pphDisplay">—</span>
+          <!-- Chart Wrapper -->
+          <div class="donut-wrap chart-wrapper">
+            <svg id="donut" viewBox="0 0 120 120" role="img" aria-label="Grafik donut gaji bersih vs potongan"></svg>
+            <p class="donut-caption" id="donut-caption"></p>
           </div>
-          <div class="breakdown-row deduction">
-            <span>BPJS Kesehatan (1%)</span>
-            <span class="val" id="bpjsKeshDisplay">—</span>
-          </div>
-          <div class="breakdown-row deduction">
-            <span>BPJS JHT (2%)</span>
-            <span class="val" id="bpjsJhtDisplay">—</span>
-          </div>
-          <div class="breakdown-row deduction">
-            <span>BPJS JP (1%)</span>
-            <span class="val" id="bpjsJpDisplay">—</span>
-          </div>
-        </div>
-
-        <!-- Chart Wrapper -->
-        <div class="chart-wrapper">
-          <canvas id="salaryChart"></canvas>
         </div>
 
         <!-- Catatan metode TER -->
@@ -141,12 +126,12 @@
 
         <!-- Connected Journey Buttons -->
         <div class="hasil-actions">
-          <a href="/compare.html" class="btn-secondary" data-action="go-compare">
+          <button type="button" class="btn btn-secondary" data-action="go-compare">
             Bandingkan dengan Offer Lain →
-          </a>
-          <a href="/offer-analyzer.html" class="btn-secondary" data-action="go-offer-analyzer">
+          </button>
+          <button type="button" class="btn btn-secondary" data-action="go-offer-analyzer">
             Cek Apakah Gaji Ini Underpaid →
-          </a>
+          </button>
         </div>
 
         <!-- Catatan Asumsi -->
@@ -178,7 +163,7 @@
   </main>
 
   <!-- Footer Varian A: Local Processing -->
-  <footer class="footer-variant-a">
+  <footer class="footer-variant-a site-footer">
     <div class="container">
       <p class="privacy-badge">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -186,14 +171,14 @@
       </p>
       <p>Data gaji tidak dikirim atau disimpan di server.</p>
       <div class="legal-links">
-        <a href="/privacy.html">Kebijakan Privasi</a>
-        <a href="/terms.html">Syarat & Ketentuan</a>
-        <a href="/disclaimer.html">Penafian Hukum</a>
+        <a href="privacy.html">Kebijakan Privasi</a>
+        <a href="terms.html">Syarat & Ketentuan</a>
+        <a href="disclaimer.html">Penafian Hukum</a>
       </div>
       <p class="disclaimer">Simulasi ini bersifat edukatif dan bukan nasihat pajak atau hukum resmi.</p>
     </div>
   </footer>
 
-  <script type="module" src="js/calculator-page.js?v=11"></script>
+  <script type="module" src="js/calculator-page.js?v=12"></script>
 </body>
 </html>

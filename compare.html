@@ -11,15 +11,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
   <!-- Design System -->
-  <link rel="stylesheet" href="css/design-system.css?v=11">
-  <link rel="stylesheet" href="css/style.css?v=11">
+  <link rel="stylesheet" href="css/design-system.css?v=12">
+  <link rel="stylesheet" href="css/style.css?v=12">
 </head>
 <body>
   <!-- Compact Sticky Header + Segmented Navigation -->
   <header class="app-header">
     <div class="header-inner">
       <div class="brand-row">
-        <a href="/" class="brand-logo">Gaji<span>CVKita</span></a>
+        <a href="/" class="brand brand-logo">Gaji<span>CVKita</span></a>
         <span class="brand-badge">v1.1 TERBARU</span>
       </div>
       <nav class="segmented-nav" id="mainNav">
@@ -183,14 +183,11 @@
 
       <!-- Hasil Compare -->
       <section id="hasil-compare" class="compare-cards" hidden>
-        <!-- Winner Badge -->
-        <div class="winner-badge" id="winnerBadge" style="display:none;">
-          <div class="label">Rekomendasi Terbaik</div>
-          <div class="text" id="winnerText"></div>
-        </div>
+        <!-- Winner Line -->
+        <div class="winner-line" id="winner-line" style="display:none;"></div>
 
         <!-- Compare Cards (stacked mobile, side-by-side desktop) -->
-        <div class="compare-cards" id="compareGrid"></div>
+        <div class="compare-grid" id="compare-grid"></div>
 
         <!-- Rumus Transparan & Catatan Pajak -->
         <section class="rumus-transparan">
@@ -207,7 +204,7 @@
   </main>
 
   <!-- Footer Varian A: Local Processing -->
-  <footer class="footer-variant-a">
+  <footer class="footer-variant-a site-footer">
     <div class="container">
       <p class="privacy-badge">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -215,14 +212,14 @@
       </p>
       <p>Data gaji tidak dikirim atau disimpan di server.</p>
       <div class="legal-links">
-        <a href="/privacy.html">Kebijakan Privasi</a>
-        <a href="/terms.html">Syarat & Ketentuan</a>
-        <a href="/disclaimer.html">Penafian Hukum</a>
+        <a href="privacy.html">Kebijakan Privasi</a>
+        <a href="terms.html">Syarat & Ketentuan</a>
+        <a href="disclaimer.html">Penafian Hukum</a>
       </div>
       <p class="disclaimer">Simulasi ini bersifat edukatif dan bukan nasihat pajak atau hukum resmi.</p>
     </div>
   </footer>
 
-  <script type="module" src="js/compare-page.js?v=11"></script>
+  <script type="module" src="js/compare-page.js?v=12"></script>
 </body>
 </html>
