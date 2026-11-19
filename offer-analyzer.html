@@ -6,7 +6,7 @@
   <title>AI Offer Analyzer — Analisis Offering Letter | GajiCVKita</title>
   <meta name="description" content="Upload surat penawaran kerja (PDF/teks): cek gratis apakah gajimu underpaid atau competitive, lalu buka benchmark pasar, risiko klausul, target counter-offer, dan 3 skrip negosiasi siap kirim.">
   <link rel="canonical" href="https://gaji.cvkita.id/offer-analyzer.html">
-  <link rel="stylesheet" href="css/style.css?v=5">
+  <link rel="stylesheet" href="css/style.css?v=6">
 </head>
 <body>
   <header class="site-header">
@@ -37,27 +37,31 @@
         <input id="job-title" type="text" maxlength="120" placeholder="contoh: Staff Accounting">
 
         <label for="offered-salary">Gaji Bruto Ditawarkan (Rp/bulan)</label>
-        <input id="offered-salary" type="number" min="0" step="100000" inputmode="numeric" placeholder="contoh: 6000000">
+        <input id="offered-salary" type="text" inputmode="numeric" min="0" step="100000" inputmode="numeric" placeholder="contoh: 6000000">
 
         <button id="btn-analyze" type="submit" class="btn btn-primary">Analisis Gratis</button>
         <p id="analyzer-error" class="form-error" hidden></p>
       </form>
 
+      <section id="paywall" class="paywall">
+        <div id="locked-preview" class="locked-preview" aria-hidden="true">
+          <div class="locked-row"><span>Benchmark rentang gaji pasar (role + lokasi)</span><span class="locked">Rp ██ — ██ jt</span></div>
+          <div class="locked-row"><span>Target counter-offer</span><span class="locked">Rp ██.███.███</span></div>
+        </div>
+        <p>Buka hasil lengkap: benchmark rentang gaji pasar, deteksi risiko klausul kontrak, target angka counter-offer, dan <strong>3 skrip negosiasi siap kirim</strong> (WhatsApp, Email, Fallback non-gaji).</p>
+        <a class="btn btn-primary" href="pay.html?amount=29000">Buka Analisis Lengkap — Rp 29.000</a>
+        <p class="hint">Sudah punya kode? Masukkan di bawah — gratis, tidak dipotong kuota.</p>
+        <div class="lic-row">
+          <input id="lic-input" type="text" placeholder="Kode lisensi (HG-XXXX-XXXX)">
+          <button id="btn-full-analysis" type="button" class="btn btn-secondary">Analisis Penuh</button>
+        </div>
+        <p id="lic-error" class="form-error" hidden></p>
+      </section>
+
       <section id="teaser" class="hasil teaser" hidden>
         <p class="teaser-title">Verdict pasar:</p>
         <p id="teaser-verdict" class="teaser-verdict">—</p>
         <p class="teaser-gap"><span class="teaser-label">1 celah negosiasi utama:</span> <span id="teaser-gap-text">—</span></p>
-        <div id="locked-preview" class="locked-preview" aria-hidden="true"></div>
-        <div id="paywall" class="paywall">
-          <p>Buka hasil lengkap: benchmark rentang gaji pasar, deteksi risiko klausul kontrak, target angka counter-offer, dan <strong>3 skrip negosiasi siap kirim</strong> (WhatsApp, Email, Fallback non-gaji).</p>
-          <a class="btn btn-primary" href="pay.html?amount=29000">Buka Analisis Lengkap — Rp 29.000</a>
-          <p class="hint">Sudah punya kode? Masukkan di bawah — gratis, tidak dipotong kuota.</p>
-          <div class="lic-row">
-            <input id="lic-input" type="text" placeholder="Kode lisensi (HG-XXXX-XXXX)">
-            <button id="btn-full-analysis" type="button" class="btn btn-secondary">Analisis Penuh</button>
-          </div>
-          <p id="lic-error" class="form-error" hidden></p>
-        </div>
       </section>
 
       <section id="hasil-penuh" class="hasil" hidden>
@@ -101,6 +105,6 @@
     <p>Dari <a href="https://cvkita.id">CVKita</a> — CV builder gratis untuk fresh graduate Indonesia.</p>
   </footer>
 
-  <script type="module" src="js/offer-analyzer-page.js?v=5"></script>
+  <script type="module" src="js/offer-analyzer-page.js?v=6"></script>
 </body>
 </html>
