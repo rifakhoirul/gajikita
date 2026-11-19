@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GajiCVKita — Simulator Gaji Bersih PPh 21 TER</title>
+  <title>GajiCVKita — Simulator Gaji Bersih PPh 21 TER Tahun 2026</title>
   <meta name="description" content="Hitung take-home pay kamu dengan tarif PPh 21 TER (PP 58/2023), potongan BPJS Kesehatan & Ketenagakerjaan, bandingkan dua offering kerja, dan negosiasi gaji pakai AI. Gratis.">
   <link rel="canonical" href="https://gaji.cvkita.id/">
-  <link rel="stylesheet" href="css/style.css?v=7">
+  <link rel="stylesheet" href="css/style.css?v=8">
 </head>
 <body>
   <header class="site-header">
@@ -26,7 +26,11 @@
         lengkap dengan AI Offer Negotiator untuk membaca surat penawaran kerja kamu.
       </p>
       <p class="hero-cta">
-        <a class="btn btn-primary" href="index.html">Hitung Gaji Bersih — Gratis</a>
+        <a class="btn btn-primary" href="#kalkulator">Buka Kalkulator</a>
+      </p>
+      <p class="presets" style="margin-top:12px;">
+        <button type="button" class="btn btn-secondary" data-preset="5729876">Isi Contoh: UMR Jakarta</button>
+        <button type="button" class="btn btn-secondary" data-preset="12000000">Contoh: Gaji Rp 12 Juta</button>
       </p>
     </section>
 
@@ -47,6 +51,8 @@
         <select id="ptkp" name="ptkp">
           <option value="TK/0">TK/0 — Tidak kawin</option>
           <option value="TK/1">TK/1 — Tidak kawin, 1 tanggungan</option>
+          <option value="TK/2">TK/2 — Tidak kawin, 2 tanggungan</option>
+          <option value="TK/3">TK/3 — Tidak kawin, 3 tanggungan</option>
           <option value="K/0" selected>K/0 — Kawin</option>
           <option value="K/1">K/1 — Kawin, 1 tanggungan</option>
           <option value="K/2">K/2 — Kawin, 2 tanggungan</option>
@@ -93,8 +99,16 @@
 
   <footer class="site-footer">
     <p>Dari <a href="https://cvkita.id">CVKita</a> — CV builder gratis untuk fresh graduate Indonesia.</p>
+    <p style="margin-top:8px; font-size:13px; color:#6b7280;">
+      <a href="privacy.html">Kebijakan Privasi</a> ·
+      <a href="terms.html">Syarat & Ketentuan</a> ·
+      <a href="disclaimer.html">Disclaimer</a>
+    </p>
+    <p style="margin-top:4px; font-size:12px; color:#9ca3af;">
+      Simulasi ini bersifat edukatif dan bukan nasihat pajak atau hukum resmi.
+    </p>
   </footer>
 
-  <script type="module" src="js/calculator-page.js?v=7"></script>
+  <script type="module" src="js/calculator-page.js?v=8"></script>
 </body>
 </html>

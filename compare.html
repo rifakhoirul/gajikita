@@ -6,7 +6,7 @@
   <title>Adu Offering — Bandingkan Dua Penawaran Kerja | GajiCVKita</title>
   <meta name="description" content="Bandingkan dua penawaran kerja side-by-side: take-home pay PPh 21 TER, BPJS, THR, bonus, komuter, dan skema kerja (WFO/Hybrid/Remote). Semua dihitung di browser, gratis.">
   <link rel="canonical" href="https://gaji.cvkita.id/compare.html">
-  <link rel="stylesheet" href="css/style.css?v=7">
+  <link rel="stylesheet" href="css/style.css?v=8">
 </head>
 <body>
   <header class="site-header">
@@ -51,6 +51,8 @@
             <select id="a-ptkp">
               <option value="TK/0">TK/0 — Tidak kawin</option>
               <option value="TK/1">TK/1</option>
+              <option value="TK/2">TK/2</option>
+              <option value="TK/3">TK/3</option>
               <option value="K/0" selected>K/0 — Kawin</option>
               <option value="K/1">K/1</option>
               <option value="K/2">K/2</option>
@@ -82,6 +84,8 @@
             <select id="b-ptkp">
               <option value="TK/0">TK/0 — Tidak kawin</option>
               <option value="TK/1">TK/1</option>
+              <option value="TK/2">TK/2</option>
+              <option value="TK/3">TK/3</option>
               <option value="K/0" selected>K/0 — Kawin</option>
               <option value="K/1">K/1</option>
               <option value="K/2">K/2</option>
@@ -99,13 +103,31 @@
         <div class="compare-grid" id="compare-grid"></div>
         <p class="catatan">Total kompensasi setahun = THP×12 + THR + bonus + manfaat×12 − komuter×12. Skema kerja dan nilai fleksibilitas ditampilkan sebagai konteks keputusan.</p>
       </section>
+
+      <section class="rumus-transparan" style="margin-top:24px; padding:16px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px;">
+        <h3 style="margin:0 0 12px 0;">Rumus Transparan & Catatan Pajak</h3>
+        <ul style="margin:0; padding-left:20px; font-size:14px; line-height:1.8; color:#374151;">
+          <li><strong>Biaya komuter</strong> dikurangkan dari total kompensasi setahun (Rp/bulan × 12) karena bersifat biaya wajib untuk dapat bekerja (bukan tunjangan).</li>
+          <li><strong>THR & Bonus</strong> dikenai pajak di bulan diterima (bukan di bulan accrual) — mengikuti ketentuan PPh 21 TER.</li>
+          <li><strong>Proyeksi tahunan</strong> belum termasuk <em>true-up</em> Pasal 17 Masa Pajak Desember (penyesuaian akhir tahun PPh 21). Angka aktual bisa berbeda setelah perhitungan tahunan lengkap.</li>
+          <li>Perhitungan THP bulanan berbasis <strong>tarif PPh 21 TER (PP 58/2023)</strong> + potongan BPJS Kesehatan (1%, cap Rp12jt) & Ketenagakerjaan (JHT 2%, JP 1% cap Rp11,086,300, JKK/JKM per kewajiban perusahaan).</li>
+        </ul>
+      </section>
     </section>
   </main>
 
   <footer class="site-footer">
     <p>Dari <a href="https://cvkita.id">CVKita</a> — CV builder gratis untuk fresh graduate Indonesia.</p>
+    <p style="margin-top:8px; font-size:13px; color:#6b7280;">
+      <a href="privacy.html">Kebijakan Privasi</a> ·
+      <a href="terms.html">Syarat & Ketentuan</a> ·
+      <a href="disclaimer.html">Disclaimer</a>
+    </p>
+    <p style="margin-top:4px; font-size:12px; color:#9ca3af;">
+      Simulasi ini bersifat edukatif dan bukan nasihat pajak atau hukum resmi.
+    </p>
   </footer>
 
-  <script type="module" src="js/compare-page.js?v=7"></script>
+  <script type="module" src="js/compare-page.js?v=8"></script>
 </body>
 </html>
