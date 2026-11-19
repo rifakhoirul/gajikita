@@ -25,6 +25,10 @@ function parseRupiah(raw) {
     // koma tunggal diikuti <=2 digit → desimal; lainnya → pemisah ribuan
     if (/,\d{1,2}$/.test(s)) s = s.replace(',', '.');
     else s = s.replace(/,/g, '');
+  } else if (hasDot) {
+    // Rupiah: titik berkelompok 3 digit = pemisah ribuan ("Rp 10.000.000" → 10000000).
+    // Titik tunggal tanpa kelompok 3 digit tetap dibaca desimal ("10.5" → 10.5).
+    if (/^\d{1,3}(\.\d{3})+$/.test(s)) s = s.replace(/\./g, '');
   }
   return Number(s);
 }

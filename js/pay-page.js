@@ -87,12 +87,13 @@ const btn = document.getElementById('btn-buy');
 if (btn) btn.addEventListener('click', beli);
 
 // UI-007 (audit): tombol salin kode lisensi + toast konfirmasi.
-function toast(msg) {
-  const t = document.createElement('div');
-  t.className = 'copy-toast';
+function showToast(msg) {
+  const t = document.getElementById('copy-toast');
+  if (!t) return;
   t.textContent = msg;
-  document.body.appendChild(t);
-  setTimeout(() => t.remove(), 2200);
+  t.hidden = false;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
 }
 
 const btnCopy = document.getElementById('btn-copy');
@@ -102,7 +103,6 @@ if (btnCopy) {
     if (!kode || kode === '—') return;
     try {
       await navigator.clipboard.writeText(kode);
-      toast('Kode lisensi disalin');
     } catch {
       // Fallback: browser tanpa izin clipboard (http / iframe ketat).
       const ta = document.createElement('textarea');
@@ -113,7 +113,7 @@ if (btnCopy) {
       ta.select();
       document.execCommand('copy');
       ta.remove();
-      toast('Kode lisensi disalin');
     }
+    showToast('Tersalin!');
   });
 }

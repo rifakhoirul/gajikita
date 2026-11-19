@@ -49,13 +49,11 @@ function bind() {
   const fmtIds = ['gaji', 'tetap', 'thr', 'bonus', 'manfaat', 'komuter'];
   const pasang = (el) => {
     if (!el) return;
-    el.addEventListener('focus', () => {
-      const n = GajiCalc.parseRupiah(el.value);
-      el.value = Number.isFinite(n) && n > 0 ? String(Math.round(n)) : '';
-    });
-    el.addEventListener('blur', () => {
-      const n = GajiCalc.parseRupiah(el.value);
-      el.value = Number.isFinite(n) && n > 0 ? fmt(n) : '';
+    el.setAttribute('inputmode', 'numeric');
+    // Real-time dari digit mentah (tahan nilai campuran "Rp 1.0000").
+    el.addEventListener('input', () => {
+      const digits = el.value.replace(/\D/g, '');
+      el.value = digits ? fmt(Number(digits)) : '';
     });
   };
   fmtIds.forEach((f) => { pasang(document.getElementById('a-' + f)); pasang(document.getElementById('b-' + f)); });

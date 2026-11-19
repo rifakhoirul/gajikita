@@ -14,10 +14,11 @@ function angkaMentah(v) {
 function pasangFormatter(el) {
   if (!el) return;
   el.setAttribute('inputmode', 'numeric');
-  el.addEventListener('focus', () => { el.value = angkaMentah(el.value); });
-  el.addEventListener('blur', () => {
-    const n = GajiCalc.parseRupiah(el.value);
-    el.value = Number.isFinite(n) && n > 0 ? fmt(n) : '';
+  // Real-time: setiap keystroke diformat ulang dari digit mentah (tahan terhadap
+  // nilai campuran "Rp 1.0000"); parseRupiah di submit tetap sebagai jaring pengaman.
+  el.addEventListener('input', () => {
+    const digits = el.value.replace(/\D/g, '');
+    el.value = digits ? fmt(Number(digits)) : '';
   });
 }
 
@@ -66,21 +67,9 @@ function bind() {
   const form = document.getElementById('form-gaji');
   const err = document.getElementById('form-error');
   if (!form) return;
-  // UI-002: formatter ribuan pada semua input rupiah
-  ['gaji-pokok', 'tunjangan-tetap', 'tunjangan-lain'].forEach((id) => pasangFormatter(document.getElementById(id)));
-  // UI-008 (audit): prefill dari CTA halaman simulasi SSR (?gaji=…&ptkp=…)
-  const params = new URLSearchParams(window.location.search);
-  const gajiParam = params.get('gaji');
-  if (gajiParam && GajiCalc.parseRupiah(gajiParam) > 0) {
-    document.getElementById('gaji-pokok').value = fmt(GajiCalc.parseRupiah(gajiParam));
-    const ptkpParam = params.get('ptkp');
-    if (ptkpParam && document.getElementById('ptkp').querySelector('option[value="' + ptkpParam + '"]')) {
-      document.getElementById('ptkp').value = ptkpParam;
-    }
-    form.requestSubmit();
-  }
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
+
+  function doSubmit(e) {
+    if (e && e.preventDefault) e.preventDefault();
     err.hidden = true;
     const input = {
       gajiPokok: document.getElementById('gaji-pokok').value,
@@ -95,7 +84,24 @@ function bind() {
       err.hidden = false;
       document.getElementById('hasil').hidden = true;
     }
-  });
+  }
+
+  // UI-002: formatter ribuan pada semua input rupiah
+  ['gaji-pokok', 'tunjangan-tetap', 'tunjangan-lain'].forEach((id) => pasangFormatter(document.getElementById(id)));
+
+  form.addEventListener('submit', doSubmit);
+
+  // UI-008 (audit): prefill dari CTA halaman simulasi SSR (?gaji=…&ptkp=…)
+  const params = new URLSearchParams(window.location.search);
+  const gajiParam = params.get('gaji');
+  if (gajiParam && GajiCalc.parseRupiah(gajiParam) > 0) {
+    document.getElementById('gaji-pokok').value = fmt(GajiCalc.parseRupiah(gajiParam));
+    const ptkpParam = params.get('ptkp');
+    if (ptkpParam && document.getElementById('ptkp').querySelector('option[value="' + ptkpParam + '"]')) {
+      document.getElementById('ptkp').value = ptkpParam;
+    }
+    doSubmit(); // langsung render; requestSubmit() terlalu dini sebelum listener siap
+  }
 }
 
 bind();

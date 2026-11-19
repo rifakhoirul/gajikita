@@ -13,7 +13,7 @@ test.describe('audit-fix', () => {
 
   test('UI-002: format ribuan otomatis + submit tetap benar', async ({ page }) => {
     await page.goto('/');
-    await page.fill('#gaji-pokok', '10000000');
+    await page.locator('#gaji-pokok').pressSequentially('10000000');
     await expect(page.locator('#gaji-pokok')).toHaveValue('Rp 10.000.000');
     await page.click('#btn-hitung');
     await expect(page.locator('#thp')).toContainText('Rp');
