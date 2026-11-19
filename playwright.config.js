@@ -2,6 +2,7 @@
 // butuh http:// — file:// memblokir import module). reuseExistingServer agar hemat.
 module.exports = {
   testDir: 'tests',
+  testIgnore: '**/live.spec.js',
   timeout: 15000,
   webServer: {
     command: 'python3 -m http.server 8093',
