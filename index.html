@@ -6,103 +6,164 @@
   <title>GajiCVKita — Simulator Gaji Bersih PPh 21 TER Tahun 2026</title>
   <meta name="description" content="Hitung take-home pay kamu dengan tarif PPh 21 TER (PP 58/2023), potongan BPJS Kesehatan & Ketenagakerjaan, bandingkan dua offering kerja, dan negosiasi gaji pakai AI. Gratis.">
   <link rel="canonical" href="https://gaji.cvkita.id/">
-  <link rel="stylesheet" href="css/style.css?v=9">
+  <!-- Google Fonts: Plus Jakarta Sans + JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <!-- Design System v1.1 + Legacy style.css -->
+  <link rel="stylesheet" href="css/design-system.css?v=11">
+  <link rel="stylesheet" href="css/style.css?v=11">
 </head>
 <body>
-  <header class="site-header">
-    <a class="brand" href="/">Gaji<span>CVKita</span></a>
-    <nav class="nav">
-      <a href="index.html">Kalkulator Gaji</a>
-      <a href="compare.html">Adu Offering</a>
-      <a href="offer-analyzer.html">Offer Analyzer</a>
-    </nav>
+  <!-- Compact Sticky Header + Segmented Navigation -->
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="brand-row">
+        <a href="/" class="brand-logo">Gaji<span>CVKita</span></a>
+        <span class="brand-badge">v1.1 TERBARU</span>
+      </div>
+      <nav class="segmented-nav" id="mainNav">
+        <a href="/" class="active" id="navCalc">Kalkulator</a>
+        <a href="/compare.html" id="navCompare">Adu Offer</a>
+        <a href="/offer-analyzer.html" id="navAnalyzer">AI Offer Cek</a>
+      </nav>
+    </div>
   </header>
 
   <main>
-    <section class="hero">
-      <h1>Berapa sih gaji bersih kamu sebenarnya?</h1>
-      <p class="sub">
-        Simulator take-home pay berbasis tarif PPh 21 TER (PP 58/2023) + potongan BPJS,
-        lengkap dengan AI Offer Negotiator untuk membaca surat penawaran kerja kamu.
-      </p>
-      <p class="hero-cta">
-        <a class="btn btn-primary" href="#kalkulator">Buka Kalkulator</a>
-      </p>
-      <p class="presets" style="margin-top:12px;">
-        <button type="button" class="btn btn-secondary" data-preset="5729876">Isi Contoh: UMR Jakarta</button>
-        <button type="button" class="btn btn-secondary" data-preset="12000000">Contoh: Gaji Rp 12 Juta</button>
-      </p>
+    <!-- Compact Left-Aligned Hero -->
+    <section class="hero-compact">
+      <h1 id="pageTitle">Kalkulator Gaji Bersih (THP)</h1>
+      <p id="pageSubtitle">Hitung potongan PPh 21 TER 2026 (PP 58/2023 & PMK 168/2023) & BPJS secara akurat.</p>
     </section>
 
+    <!-- Preset Quick-Fill Chips -->
+    <div class="preset-bar">
+      <span class="preset-label">Preset:</span>
+      <button type="button" class="preset-chip" data-preset="5729876" id="preset5m">UMR Jakarta</button>
+      <button type="button" class="preset-chip" data-preset="10000000" id="preset10m">10 Jt</button>
+      <button type="button" class="preset-chip" data-preset="15000000" id="preset15m">15 Jt</button>
+      <button type="button" class="preset-chip" data-preset="25000000" id="preset25m">25 Jt</button>
+    </div>
+
+    <!-- Kalkulator Form -->
     <section class="kalkulator" id="kalkulator">
-      <h2>Kalkulator Gaji Bersih — PPh 21 TER</h2>
-      <p class="hint">Semua perhitungan jalan di browser kamu. Tidak ada data yang dikirim ke server.</p>
-      <form id="form-gaji" autocomplete="off">
-        <label for="gaji-pokok">Gaji Pokok (Rp/bulan)</label>
-        <input id="gaji-pokok" name="gajiPokok" type="text" inputmode="numeric" min="0" placeholder="contoh: 6000000">
+      <form id="form-gaji" autocomplete="off" novalidate>
+        <!-- Gaji Pokok: Fintech Input Group dengan Prefix Rp -->
+        <div class="form-group">
+          <label for="gaji-pokok" class="form-label">Gaji Pokok Per Bulan</label>
+          <div class="input-group">
+            <span class="input-prefix">Rp</span>
+            <input type="text" id="gaji-pokok" name="gajiPokok" inputmode="numeric" placeholder="10.000.000" data-testid="input-salary" autocomplete="off" required>
+          </div>
+        </div>
 
-        <label for="tunjangan-tetap">Tunjangan Tetap (Rp/bulan)</label>
-        <input id="tunjangan-tetap" name="tunjanganTetap" type="text" inputmode="numeric" min="0" step="1000" placeholder="0">
+        <!-- Tunjangan Tetap -->
+        <div class="form-group">
+          <label for="tunjangan-tetap" class="form-label">Tunjangan Tetap (Rp/bulan)</label>
+          <div class="input-group">
+            <span class="input-prefix">Rp</span>
+            <input type="text" id="tunjangan-tetap" name="tunjanganTetap" inputmode="numeric" min="0" step="1000" placeholder="0" autocomplete="off">
+          </div>
+        </div>
 
-        <label for="tunjangan-lain">Tunjangan Lain / Bonus Rutin (Rp/bulan)</label>
-        <input id="tunjangan-lain" name="tunjanganLain" type="text" inputmode="numeric" min="0" step="1000" placeholder="0">
+        <!-- Tunjangan Lain / Bonus Rutin -->
+        <div class="form-group">
+          <label for="tunjangan-lain" class="form-label">Tunjangan Lain / Bonus Rutin (Rp/bulan)</label>
+          <div class="input-group">
+            <span class="input-prefix">Rp</span>
+            <input type="text" id="tunjangan-lain" name="tunjanganLain" inputmode="numeric" min="0" step="1000" placeholder="0" autocomplete="off">
+          </div>
+        </div>
 
-        <label for="ptkp">Status PTKP</label>
-        <select id="ptkp" name="ptkp">
-          <option value="TK/0">TK/0 — Tidak kawin</option>
-          <option value="TK/1">TK/1 — Tidak kawin, 1 tanggungan</option>
-          <option value="TK/2">TK/2 — Tidak kawin, 2 tanggungan</option>
-          <option value="TK/3">TK/3 — Tidak kawin, 3 tanggungan</option>
-          <option value="K/0" selected>K/0 — Kawin</option>
-          <option value="K/1">K/1 — Kawin, 1 tanggungan</option>
-          <option value="K/2">K/2 — Kawin, 2 tanggungan</option>
-          <option value="K/3">K/3 — Kawin, 3 tanggungan</option>
-        </select>
+        <!-- Status PTKP: Custom Select Dropdown -->
+        <div class="form-group">
+          <label for="ptkp" class="form-label">Status PTKP</label>
+          <select id="ptkp" name="ptkp" class="select-input">
+            <option value="TK/0">TK/0 — Tidak kawin, 0 Tanggungan</option>
+            <option value="TK/1">TK/1 — Tidak kawin, 1 Tanggungan</option>
+            <option value="TK/2">TK/2 — Tidak kawin, 2 Tanggungan</option>
+            <option value="TK/3">TK/3 — Tidak kawin, 3 Tanggungan</option>
+            <option value="K/0" selected>K/0 — Kawin, 0 Tanggungan</option>
+            <option value="K/1">K/1 — Kawin, 1 Tanggungan</option>
+            <option value="K/2">K/2 — Kawin, 2 Tanggungan</option>
+            <option value="K/3">K/3 — Kawin, 3 Tanggungan</option>
+          </select>
+        </div>
 
-        <button id="btn-hitung" type="submit" class="btn btn-primary">Hitung Gaji Bersih</button>
+        <!-- Primary CTA -->
+        <button type="submit" id="btn-hitung" class="btn-primary" data-testid="btn-calculate">
+          Hitung Gaji Bersih
+        </button>
         <p id="form-error" class="form-error" hidden></p>
       </form>
 
-      <section id="hasil" class="hasil" hidden>
-        <div class="hasil-utama">
-          <p class="hasil-label">Take-Home Pay / bulan</p>
-          <p id="thp" class="hasil-angka">—</p>
-          <p class="hasil-sub">Proyeksi setahun: <strong id="thp-tahunan">—</strong></p>
+      <!-- Hasil: Result Card -->
+      <section id="hasil" class="result-card" hidden data-testid="result-container">
+        <div class="result-hero-box">
+          <div class="label">Take-Home Pay (Gaji Bersih)</div>
+          <div class="amount" id="thpDisplay" data-testid="thp-display">—</div>
+          <div class="subtext">Diterima setiap bulan setelah pajak & BPJS</div>
         </div>
-        <div class="hasil-grid">
-          <div class="rincian">
-            <h3>Rincian Potongan</h3>
-            <ul id="rincian-potongan"></ul>
+
+        <div class="breakdown-list">
+          <div class="breakdown-row">
+            <span>Gaji Kotor (Gross)</span>
+            <span class="val" id="grossDisplay">—</span>
           </div>
-          <div class="donut-wrap">
-            <svg id="donut" viewBox="0 0 120 120" role="img" aria-label="Grafik donut gaji bersih vs potongan"></svg>
-            <p class="donut-caption" id="donut-caption"></p>
+          <div class="breakdown-row deduction">
+            <span>Potongan PPh 21 TER</span>
+            <span class="val" id="pphDisplay">—</span>
+          </div>
+          <div class="breakdown-row deduction">
+            <span>BPJS Kesehatan (1%)</span>
+            <span class="val" id="bpjsKeshDisplay">—</span>
+          </div>
+          <div class="breakdown-row deduction">
+            <span>BPJS JHT (2%)</span>
+            <span class="val" id="bpjsJhtDisplay">—</span>
+          </div>
+          <div class="breakdown-row deduction">
+            <span>BPJS JP (1%)</span>
+            <span class="val" id="bpjsJpDisplay">—</span>
           </div>
         </div>
-        <p class="catatan">Tarif PPh 21 mengikuti metode TER (PP 58/2023) masa pajak Jan–Nov. Desember direkonsiliasi pemberi kerja dengan tarif progresif — angka setahun bisa sedikit berbeda.</p>
 
-      <div class="hasil-actions" style="margin-top:16px; display:flex; gap:12px; flex-wrap:wrap;">
-        <button type="button" class="btn btn-secondary" data-action="go-compare">
-          Bandingkan dengan Offer Lain →
-        </button>
-        <button type="button" class="btn btn-secondary" data-action="go-offer-analyzer">
-          Cek Apakah Gaji Ini Underpaid →
-        </button>
-      </div>
+        <!-- Chart Wrapper -->
+        <div class="chart-wrapper">
+          <canvas id="salaryChart"></canvas>
+        </div>
 
-      <div class="catatan-asumsi" data-asumsi style="margin-top:16px; padding:12px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; font-size:13px; line-height:1.7; color:#374151;">
-        <strong>Asumsi perhitungan:</strong>
-        <ul style="margin:8px 0 0 0; padding-left:20px;">
-          <li>Karyawan <strong>pegawai tetap</strong> dengan penghasilan teratur bulanan.</li>
-          <li>BPJS Kesehatan 1% (cap Rp 12.000.000), JHT 2%, JP 1% (cap Rp 11.086.300 per 2026).</li>
-          <li>THR & Bonus: pajak dihitung pada <strong>bulan diterima</strong> (bruto bulan tsb = gaji bulanan + THR/bonus) sesuai ketentuan PPh 21 TER.</li>
-          <li>Proyeksi tahunan ini <strong>belum termasuk true-up</strong> Masa Pajak Desember (Pasal 17) — angka aktual direkonsiliasi pemberi kerja akhir tahun.</li>
-        </ul>
-      </div>
+        <!-- Catatan metode TER -->
+        <p class="catatan" style="margin-top:12px; font-size:12px; color:var(--color-text-muted);">
+          Tarif PPh 21 mengikuti metode TER (PP 58/2023) masa pajak Jan–Nov. Desember direkonsiliasi pemberi kerja dengan tarif progresif — angka setahun bisa sedikit berbeda.
+        </p>
+
+        <!-- Connected Journey Buttons -->
+        <div class="hasil-actions">
+          <a href="/compare.html" class="btn-secondary" data-action="go-compare">
+            Bandingkan dengan Offer Lain →
+          </a>
+          <a href="/offer-analyzer.html" class="btn-secondary" data-action="go-offer-analyzer">
+            Cek Apakah Gaji Ini Underpaid →
+          </a>
+        </div>
+
+        <!-- Catatan Asumsi -->
+        <div class="catatan-asumsi" data-asumsi>
+          <strong>Asumsi perhitungan:</strong>
+          <ul>
+            <li>Karyawan <strong>pegawai tetap</strong> dengan penghasilan teratur bulanan.</li>
+            <li>BPJS Kesehatan 1% (cap Rp 12.000.000), JHT 2%, JP 1% (cap Rp 11.086.300 per 2026).</li>
+            <li>THR & Bonus: pajak dihitung pada <strong>bulan diterima</strong> (bruto bulan tsb = gaji bulanan + THR/bonus) sesuai ketentuan PPh 21 TER.</li>
+            <li>Proyeksi tahunan ini <strong>belum termasuk true-up</strong> Masa Pajak Desember (Pasal 17) — angka aktual direkonsiliasi pemberi kerja akhir tahun.</li>
+          </ul>
+        </div>
+      </section>
     </section>
-    </section>
 
-    <section class="features">
+    <!-- Features Cross-Promo -->
+    <section class="features" style="margin-top:32px;">
       <article class="card">
         <h2>Adu Offering A vs B</h2>
         <p>Dapat dua penawaran? Bandingkan total kompensasinya side-by-side, termasuk nilai non-finansial (WFO/remote, cuti, fleksibilitas).</p>
@@ -116,18 +177,23 @@
     </section>
   </main>
 
-  <footer class="site-footer">
-    <p>Dari <a href="https://cvkita.id">CVKita</a> — CV builder gratis untuk fresh graduate Indonesia.</p>
-    <p style="margin-top:8px; font-size:13px; color:#6b7280;">
-      <a href="privacy.html">Kebijakan Privasi</a> ·
-      <a href="terms.html">Syarat & Ketentuan</a> ·
-      <a href="disclaimer.html">Disclaimer</a>
-    </p>
-    <p style="margin-top:4px; font-size:12px; color:#9ca3af;">
-      Simulasi ini bersifat edukatif dan bukan nasihat pajak atau hukum resmi.
-    </p>
+  <!-- Footer Varian A: Local Processing -->
+  <footer class="footer-variant-a">
+    <div class="container">
+      <p class="privacy-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        Kalkulator berjalan 100% lokal di browser Anda
+      </p>
+      <p>Data gaji tidak dikirim atau disimpan di server.</p>
+      <div class="legal-links">
+        <a href="/privacy.html">Kebijakan Privasi</a>
+        <a href="/terms.html">Syarat & Ketentuan</a>
+        <a href="/disclaimer.html">Penafian Hukum</a>
+      </div>
+      <p class="disclaimer">Simulasi ini bersifat edukatif dan bukan nasihat pajak atau hukum resmi.</p>
+    </div>
   </footer>
 
-  <script type="module" src="js/calculator-page.js?v=9"></script>
+  <script type="module" src="js/calculator-page.js?v=11"></script>
 </body>
 </html>

@@ -6,27 +6,41 @@
   <title>Checkout Pro — Buka Analisis Lengkap | GajiCVKita</title>
   <meta name="description" content="Sekali bayar Rp 29.000: 5x analisis lengkap offering letter — benchmark gaji pasar, risiko klausul, target counter-offer, dan 3 skrip negosiasi siap kirim.">
   <link rel="canonical" href="https://gaji.cvkita.id/pay.html">
-  <link rel="stylesheet" href="css/style.css?v=9">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <!-- Design System v1.1 + Legacy style.css -->
+  <link rel="stylesheet" href="css/design-system.css?v=11">
+  <link rel="stylesheet" href="css/style.css?v=11">
   <script src="https://app.midtrans.com/snap/snap.js"
           data-client-key="Mid-client-JC5qOJTb6L0NNrp8"></script>
 </head>
 <body>
-  <header class="site-header">
-    <a class="brand" href="/">Gaji<span>CVKita</span></a>
-    <nav class="nav">
-      <a href="index.html">Kalkulator Gaji</a>
-      <a href="compare.html">Adu Offering</a>
-      <a href="offer-analyzer.html">Offer Analyzer</a>
-    </nav>
+  <!-- Compact Sticky Header + Segmented Navigation -->
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="brand-row">
+        <a href="/" class="brand-logo">Gaji<span>CVKita</span></a>
+        <span class="brand-badge">v1.1 TERBARU</span>
+      </div>
+      <nav class="segmented-nav" id="mainNav">
+        <a href="/" id="navCalc">Kalkulator</a>
+        <a href="/compare.html" id="navCompare">Adu Offer</a>
+        <a href="/offer-analyzer.html" id="navAnalyzer">AI Offer Cek</a>
+      </nav>
+    </div>
   </header>
 
   <main>
-    <section class="hero">
+    <!-- Compact Hero -->
+    <section class="hero-compact">
       <h1>Offer Analyzer Pro</h1>
-      <p class="sub">Sekali bayar, dapat <strong>5x analisis lengkap</strong>: benchmark rentang gaji pasar, deteksi risiko klausul kontrak, target counter-offer berbasis data, dan 3 skrip negosiasi siap kirim.</p>
+      <p>Sekali bayar, dapat <strong>5x analisis lengkap</strong>: benchmark rentang gaji pasar, deteksi risiko klausul kontrak, target counter-offer berbasis data, dan 3 skrip negosiasi siap kirim.</p>
     </section>
 
     <section class="kalkulator">
+      <!-- Tier Card -->
       <div class="tier-card">
         <div class="tier-pricing">
           <span class="tier-price">Rp 29.000</span>
@@ -39,13 +53,13 @@
           <li>✅ 3 skrip negosiasi: WhatsApp, Email formal, Fallback non-gaji</li>
           <li>✅ Bayar sekali, kode dikirim ke email — aktif selamanya sampai kuota habis</li>
         </ul>
-        <button id="btn-buy" class="btn btn-primary" type="button">Bayar dengan GoPay / QRIS / VA</button>
+        <button id="btn-buy" class="btn-primary" type="button">Bayar dengan GoPay / QRIS / VA</button>
         <p id="pay-status" role="status">&nbsp;</p>
         <section id="lic-result" class="hasil" hidden>
           <p class="hasil-label">Kode lisensi kamu:</p>
           <p id="lic-code" class="hasil-angka">—</p>
           <div class="lic-actions">
-            <button id="btn-copy" type="button" class="btn btn-secondary">Salin kode</button>
+            <button id="btn-copy" type="button" class="btn-secondary">Salin kode</button>
           </div>
           <p class="hint">Simpan kode ini — juga kami kirim ke email kamu. Gunakan di halaman <a href="offer-analyzer.html">Offer Analyzer</a>.</p>
         </section>
@@ -56,18 +70,20 @@
     </section>
   </main>
 
-  <footer class="site-footer">
-    <p>Dari <a href="https://cvkita.id">CVKita</a> — CV builder gratis untuk fresh graduate Indonesia.</p>
-    <p style="margin-top:8px; font-size:13px; color:#6b7280;">
-      <a href="privacy.html">Kebijakan Privasi</a> ·
-      <a href="terms.html">Syarat & Ketentuan</a> ·
-      <a href="disclaimer.html">Disclaimer</a>
-    </p>
-    <p style="margin-top:4px; font-size:12px; color:#9ca3af;">
-      Simulasi ini bersifat edukatif dan bukan nasihat pajak atau hukum resmi.
-    </p>
+  <!-- Footer Varian B: Temporary AI Processing (UU PDP) -->
+  <footer class="footer-variant-b">
+    <div class="container">
+      <p>🔒 Dokumen dan teks yang Anda kirim diproses <strong>sementara</strong> untuk ekstraksi & analisis AI, <strong>tidak disimpan permanen</strong>, dan <strong>tidak digunakan untuk melatih model</strong>.</p>
+      <p>Dari <a href="https://cvkita.id">CVKita</a> — CV builder gratis untuk fresh graduate Indonesia.</p>
+      <div class="legal-links">
+        <a href="/privacy.html">Kebijakan Privasi</a>
+        <a href="/terms.html">Syarat & Ketentuan</a>
+        <a href="/disclaimer.html">Penafian Hukum</a>
+      </div>
+      <p class="disclaimer">Simulasi ini bersifat edukatif dan bukan nasihat pajak atau hukum resmi.</p>
+    </div>
   </footer>
 
-  <script type="module" src="js/pay-page.js?v=9"></script>
+  <script type="module" src="js/pay-page.js?v=11"></script>
 </body>
 </html>

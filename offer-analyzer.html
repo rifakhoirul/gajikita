@@ -6,56 +6,90 @@
   <title>AI Offer Analyzer — Analisis Offering Letter | GajiCVKita</title>
   <meta name="description" content="Upload surat penawaran kerja (PDF/teks): cek gratis apakah gajimu underpaid atau competitive, lalu buka benchmark pasar, risiko klausul, target counter-offer, dan 3 skrip negosiasi siap kirim.">
   <link rel="canonical" href="https://gaji.cvkita.id/offer-analyzer.html">
-  <link rel="stylesheet" href="css/style.css?v=9">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <!-- Design System v1.1 + Legacy style.css -->
+  <link rel="stylesheet" href="css/design-system.css?v=11">
+  <link rel="stylesheet" href="css/style.css?v=11">
 </head>
 <body>
-  <header class="site-header">
-    <a class="brand" href="/">Gaji<span>CVKita</span></a>
-    <nav class="nav">
-      <a href="index.html">Kalkulator Gaji</a>
-      <a href="compare.html">Adu Offering</a>
-      <a href="offer-analyzer.html">Offer Analyzer</a>
-    </nav>
+  <!-- Compact Sticky Header + Segmented Navigation -->
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="brand-row">
+        <a href="/" class="brand-logo">Gaji<span>CVKita</span></a>
+        <span class="brand-badge">v1.1 TERBARU</span>
+      </div>
+      <nav class="segmented-nav" id="mainNav">
+        <a href="/" id="navCalc">Kalkulator</a>
+        <a href="/compare.html" id="navCompare">Adu Offer</a>
+        <a href="/offer-analyzer.html" class="active" id="navAnalyzer">AI Offer Cek</a>
+      </nav>
+    </div>
   </header>
 
   <main>
-    <section class="hero">
+    <!-- Compact Hero -->
+    <section class="hero-compact">
       <h1>AI Offer Analyzer</h1>
-      <p class="sub">Upload offering letter (PDF) atau paste teksnya. Cek verdict pasar <strong>gratis</strong> — hasil analisis lengkap + 3 skrip negosiasi dibuka setelah upgrade Pro.</p>
+      <p>Upload offering letter (PDF) atau paste teksnya. Cek verdict pasar <strong>gratis</strong> — hasil analisis lengkap + 3 skrip negosiasi dibuka setelah upgrade Pro.</p>
     </section>
 
     <section class="kalkulator" id="analyzer">
       <form id="form-analyzer" autocomplete="off">
-        <label for="offer-pdf">Upload Offering Letter (PDF, maks 3 MB)</label>
-        <input id="offer-pdf" type="file" accept="application/pdf,.pdf">
+        <div class="form-group">
+          <label for="offer-pdf" class="form-label">Upload Offering Letter (PDF, maks 3 MB)</label>
+          <div class="dropzone">
+            <input id="offer-pdf" type="file" accept="application/pdf,.pdf">
+          </div>
+        </div>
 
         <p class="hint">atau paste teksnya:</p>
-        <label for="offer-teks">Teks Offering Letter</label>
-        <textarea id="offer-teks" rows="6" placeholder="Paste isi surat penawaran di sini: gaji pokok, tunjangan, masa percobaan, klausul kontrak..."></textarea>
 
-        <label for="job-title">Posisi yang Ditawarkan</label>
-        <input id="job-title" type="text" maxlength="120" placeholder="contoh: Staff Accounting">
+        <div class="form-group">
+          <label for="offer-teks" class="form-label">Teks Offering Letter</label>
+          <textarea id="offer-teks" rows="6" placeholder="Paste isi surat penawaran di sini: gaji pokok, tunjangan, masa percobaan, klausul kontrak..."></textarea>
+        </div>
 
-        <label for="offered-salary">Gaji Bruto Ditawarkan (Rp/bulan)</label>
-        <input id="offered-salary" type="text" inputmode="numeric" min="0" step="100000" placeholder="contoh: 6000000">
+        <div class="form-group">
+          <label for="job-title" class="form-label">Posisi yang Ditawarkan</label>
+          <div class="input-group">
+            <input id="job-title" type="text" maxlength="120" placeholder="contoh: Staff Accounting">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="offered-salary" class="form-label">Gaji Bruto Ditawarkan (Rp/bulan)</label>
+          <div class="input-group">
+            <span class="input-prefix">Rp</span>
+            <input id="offered-salary" type="text" inputmode="numeric" min="0" step="100000" placeholder="contoh: 6000000">
+          </div>
+        </div>
 
         <p class="privacy-notice" style="margin-top:12px; padding:12px; background:#f0fdf4; border:1px solid #bbf7d0; border-radius:8px; font-size:14px; color:#166534;">
           <strong>🔒 Privasi data (UU PDP):</strong> Dokumen yang Anda upload atau teks yang Anda paste diproses <em>sementara</em> di server untuk ekstraksi teks & analisis AI, <strong>tidak disimpan permanen di database</strong>, dan <strong>tidak dipakai untuk melatih model</strong>.
           Lihat <a href="privacy.html">Kebijakan Privasi</a> lengkap.
         </p>
 
-        <button id="btn-analyze" type="submit" class="btn btn-primary">Analisis Gratis</button>
+        <button id="btn-analyze" type="submit" class="btn-primary">Analisis Gratis</button>
         <p id="analyzer-error" class="form-error" hidden></p>
       </form>
 
-      <section id="paywall" class="paywall">
-        <div id="locked-preview" class="locked-preview" aria-hidden="true">
+      <!-- Paywall Card -->
+      <section id="paywall" class="paywall-card">
+        <div id="locked-preview" class="paywall-blur-content" aria-hidden="true">
           <div class="locked-row"><span>Estimasi Rentang Pasar (role + lokasi)</span><span class="locked">Rp ██ — ██ jt</span></div>
           <div class="locked-row"><span>Target counter-offer</span><span class="locked">Rp ██.███.███</span></div>
         </div>
-        <p>Buka hasil lengkap: <strong>Estimasi Rentang Pasar</strong>, deteksi risiko klausul kontrak, target angka counter-offer, dan <strong>3 skrip negosiasi siap kirim</strong> (WhatsApp, Email, Fallback non-gaji).</p>
-        <a class="btn btn-primary" href="pay.html?amount=29000">Buka Analisis Lengkap — Rp 29.000</a>
-        
+        <div class="paywall-overlay">
+          <span class="paywall-badge">Pro</span>
+          <p class="paywall-title">Buka hasil lengkap</p>
+          <p class="paywall-desc">Estimasi Rentang Pasar, deteksi risiko klausul kontrak, target angka counter-offer, dan <strong>3 skrip negosiasi siap kirim</strong> (WhatsApp, Email, Fallback non-gaji).</p>
+          <a class="btn-primary btn-unlock-pro" href="pay.html?amount=29000">Buka Analisis Lengkap — Rp 29.000</a>
+        </div>
+
         <div class="pro-example" style="margin-top:20px; padding:16px; background:#fffbeb; border:1px solid #fde68a; border-radius:8px;">
           <h4 style="margin:0 0 8px 0; color:#92400e;">💡 Contoh Output Analisis Pro (Studi Kasus Anonim)</h4>
           <p style="margin:0 0 8px 0; font-size:14px; color:#78350f;"><strong>Role:</strong> Junior Backend Engineer · <strong>Lokasi:</strong> Jakarta · <strong>Pengalaman:</strong> 1 tahun</p>
@@ -65,12 +99,12 @@
           <p style="margin:0 0 8px 0; font-size:14px; color:#78350f;"><strong>Risiko Klausul:</strong> PKWT auto-extend 2×, Probation 6 bln 50% gaji, Denda resign 2 bln gaji</p>
           <p style="margin:0; font-size:13px; color:#a16207;"><em>Data dianonimkan. Analisis asli dibuka setelah upgrade Pro.</em></p>
         </div>
-        
+
         <p class="hint">Sudah punya kode lisensi? Masukkan di bawah — gratis, tidak dipotong kuota.</p>
         <p class="license-hint" style="font-size:13px; color:#6b7280;">Format kode: <code>HG-XXXX-XXXX</code> (kirim ke email setelah pembayaran)</p>
         <div class="lic-row">
           <input id="lic-input" type="text" placeholder="Kode lisensi (HG-XXXX-XXXX)">
-          <button id="btn-full-analysis" type="button" class="btn btn-secondary">Analisis Penuh</button>
+          <button id="btn-full-analysis" type="button" class="btn-secondary">Analisis Penuh</button>
         </div>
         <p id="lic-error" class="form-error" hidden></p>
       </section>
@@ -118,18 +152,20 @@
     </section>
   </main>
 
-  <footer class="site-footer">
-    <p>Dari <a href="https://cvkita.id">CVKita</a> — CV builder gratis untuk fresh graduate Indonesia.</p>
-    <p style="margin-top:8px; font-size:13px; color:#6b7280;">
-      <a href="privacy.html">Kebijakan Privasi</a> ·
-      <a href="terms.html">Syarat & Ketentuan</a> ·
-      <a href="disclaimer.html">Disclaimer</a>
-    </p>
-    <p style="margin-top:4px; font-size:12px; color:#9ca3af;">
-      Simulasi ini bersifat edukatif dan bukan nasihat pajak atau hukum resmi.
-    </p>
+  <!-- Footer Varian B: Temporary AI Processing (UU PDP) -->
+  <footer class="footer-variant-b">
+    <div class="container">
+      <p>🔒 Dokumen dan teks yang Anda kirim diproses <strong>sementara</strong> untuk ekstraksi & analisis AI, <strong>tidak disimpan permanen</strong>, dan <strong>tidak digunakan untuk melatih model</strong>.</p>
+      <p>Dari <a href="https://cvkita.id">CVKita</a> — CV builder gratis untuk fresh graduate Indonesia.</p>
+      <div class="legal-links">
+        <a href="/privacy.html">Kebijakan Privasi</a>
+        <a href="/terms.html">Syarat & Ketentuan</a>
+        <a href="/disclaimer.html">Penafian Hukum</a>
+      </div>
+      <p class="disclaimer">Simulasi ini bersifat edukatif dan bukan nasihat pajak atau hukum resmi.</p>
+    </div>
   </footer>
 
-  <script type="module" src="js/offer-analyzer-page.js?v=9"></script>
+  <script type="module" src="js/offer-analyzer-page.js?v=11"></script>
 </body>
 </html>

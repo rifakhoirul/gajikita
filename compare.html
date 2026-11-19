@@ -6,128 +6,223 @@
   <title>Adu Offering — Bandingkan Dua Penawaran Kerja | GajiCVKita</title>
   <meta name="description" content="Bandingkan dua penawaran kerja side-by-side: take-home pay PPh 21 TER, BPJS, THR, bonus, komuter, dan skema kerja (WFO/Hybrid/Remote). Semua dihitung di browser, gratis.">
   <link rel="canonical" href="https://gaji.cvkita.id/compare.html">
-  <link rel="stylesheet" href="css/style.css?v=9">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <!-- Design System -->
+  <link rel="stylesheet" href="css/design-system.css?v=11">
+  <link rel="stylesheet" href="css/style.css?v=11">
 </head>
 <body>
-  <header class="site-header">
-    <a class="brand" href="/">Gaji<span>CVKita</span></a>
-    <nav class="nav">
-      <a href="index.html">Kalkulator Gaji</a>
-      <a href="compare.html">Adu Offering</a>
-      <a href="offer-analyzer.html">Offer Analyzer</a>
-    </nav>
+  <!-- Compact Sticky Header + Segmented Navigation -->
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="brand-row">
+        <a href="/" class="brand-logo">Gaji<span>CVKita</span></a>
+        <span class="brand-badge">v1.1 TERBARU</span>
+      </div>
+      <nav class="segmented-nav" id="mainNav">
+        <a href="/" id="navCalc">Kalkulator</a>
+        <a href="/compare.html" class="active" id="navCompare">Adu Offer</a>
+        <a href="/offer-analyzer.html" id="navAnalyzer">AI Offer Cek</a>
+      </nav>
+    </div>
   </header>
 
-  <main>
-    <section class="hero">
-      <h1>Adu Offering A vs B</h1>
-      <p class="sub">Dapat dua penawaran? Masukkan angkanya, kami hitung take-home pay &amp; total kompensasi setahun — termasuk komuter dan skema kerja.</p>
+  <main class="compare-page">
+    <!-- Compact Hero -->
+    <section class="hero-compact">
+      <h1 id="pageTitle">Adu Offering A vs B</h1>
+      <p id="pageSubtitle">Masukkan dua penawaran, kami hitung take-home pay & total kompensasi setahun — termasuk komuter & skema kerja.</p>
     </section>
 
     <section class="compare-wrap">
-      <form id="form-compare" autocomplete="off">
+      <form id="form-compare" autocomplete="off" novalidate>
         <div class="offer-cols">
+          <!-- Offer A -->
           <fieldset class="offer-col" id="offer-a">
             <legend>Offer A</legend>
-            <label for="a-gaji">Gaji Pokok (Rp)</label>
-            <input id="a-gaji" type="text" inputmode="numeric" min="0" step="1000" placeholder="contoh: 8000000">
-            <label for="a-tetap">Tunjangan Tetap (Rp)</label>
-            <input id="a-tetap" type="text" inputmode="numeric" min="0" step="1000" placeholder="0">
-            <label for="a-thr">THR (Rp/tahun)</label>
-            <input id="a-thr" type="text" inputmode="numeric" min="0" step="100000" placeholder="0">
-            <label for="a-bonus">Bonus Tahunan (Rp)</label>
-            <input id="a-bonus" type="text" inputmode="numeric" min="0" step="100000" placeholder="0">
-            <label for="a-manfaat">Manfaat/Asuransi (Rp/bulan)</label>
-            <input id="a-manfaat" type="text" inputmode="numeric" min="0" step="50000" placeholder="0">
-            <label for="a-komuter">Biaya Komuter (Rp/bulan)</label>
-            <input id="a-komuter" type="text" inputmode="numeric" min="0" step="50000" placeholder="0">
-            <label for="a-skema">Skema Kerja</label>
-            <select id="a-skema">
-              <option value="WFO">WFO</option>
-              <option value="Hybrid">Hybrid</option>
-              <option value="Remote">Remote</option>
-            </select>
-            <label for="a-ptkp">Status PTKP</label>
-            <select id="a-ptkp">
-              <option value="TK/0">TK/0 — Tidak kawin</option>
-              <option value="TK/1">TK/1</option>
-              <option value="TK/2">TK/2</option>
-              <option value="TK/3">TK/3</option>
-              <option value="K/0" selected>K/0 — Kawin</option>
-              <option value="K/1">K/1</option>
-              <option value="K/2">K/2</option>
-              <option value="K/3">K/3</option>
-            </select>
+            <div class="form-group">
+              <label for="a-gaji" class="form-label">Gaji Pokok (Rp)</label>
+              <div class="input-group">
+                <span class="input-prefix">Rp</span>
+                <input type="text" id="a-gaji" name="aGaji" inputmode="numeric" min="0" step="1000" placeholder="contoh: 8000000" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="a-tetap" class="form-label">Tunjangan Tetap (Rp)</label>
+              <div class="input-group">
+                <span class="input-prefix">Rp</span>
+                <input type="text" id="a-tetap" name="aTetap" inputmode="numeric" min="0" step="1000" placeholder="0">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="a-thr" class="form-label">THR (Rp/tahun)</label>
+              <div class="input-group">
+                <span class="input-prefix">Rp</span>
+                <input type="text" id="a-thr" name="aTHR" inputmode="numeric" min="0" step="100000" placeholder="0">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="a-bonus" class="form-label">Bonus Tahunan (Rp)</label>
+              <div class="input-group">
+                <span class="input-prefix">Rp</span>
+                <input type="text" id="a-bonus" name="aBonus" inputmode="numeric" min="0" step="100000" placeholder="0">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="a-manfaat" class="form-label">Manfaat/Asuransi (Rp/bulan)</label>
+              <div class="input-group">
+                <span class="input-prefix">Rp</span>
+                <input type="text" id="a-manfaat" name="aManfaat" inputmode="numeric" min="0" step="50000" placeholder="0">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="a-komuter" class="form-label">Biaya Komuter (Rp/bulan)</label>
+              <div class="input-group">
+                <span class="input-prefix">Rp</span>
+                <input type="text" id="a-komuter" name="aKomuter" inputmode="numeric" min="0" step="50000" placeholder="0">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="a-skema" class="form-label">Skema Kerja</label>
+              <select id="a-skema" name="aSkema" class="select-input">
+                <option value="WFO">WFO</option>
+                <option value="Hybrid">Hybrid</option>
+                <option value="Remote">Remote</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="a-ptkp" class="form-label">Status PTKP</label>
+              <select id="a-ptkp" name="aPtkp" class="select-input">
+                <option value="TK/0">TK/0 — Tidak kawin, 0 Tanggungan</option>
+                <option value="TK/1">TK/1 — Tidak kawin, 1 Tanggungan</option>
+                <option value="TK/2">TK/2 — Tidak kawin, 2 Tanggungan</option>
+                <option value="TK/3">TK/3 — Tidak kawin, 3 Tanggungan</option>
+                <option value="K/0" selected>K/0 — Kawin, 0 Tanggungan</option>
+                <option value="K/1">K/1 — Kawin, 1 Tanggungan</option>
+                <option value="K/2">K/2 — Kawin, 2 Tanggungan</option>
+                <option value="K/3">K/3 — Kawin, 3 Tanggungan</option>
+              </select>
+            </div>
           </fieldset>
 
+          <!-- Offer B -->
           <fieldset class="offer-col" id="offer-b">
             <legend>Offer B</legend>
-            <label for="b-gaji">Gaji Pokok (Rp)</label>
-            <input id="b-gaji" type="text" inputmode="numeric" min="0" step="1000" placeholder="contoh: 9000000">
-            <label for="b-tetap">Tunjangan Tetap (Rp)</label>
-            <input id="b-tetap" type="text" inputmode="numeric" min="0" step="1000" placeholder="0">
-            <label for="b-thr">THR (Rp/tahun)</label>
-            <input id="b-thr" type="text" inputmode="numeric" min="0" step="100000" placeholder="0">
-            <label for="b-bonus">Bonus Tahunan (Rp)</label>
-            <input id="b-bonus" type="text" inputmode="numeric" min="0" step="100000" placeholder="0">
-            <label for="b-manfaat">Manfaat/Asuransi (Rp/bulan)</label>
-            <input id="b-manfaat" type="text" inputmode="numeric" min="0" step="50000" placeholder="0">
-            <label for="b-komuter">Biaya Komuter (Rp/bulan)</label>
-            <input id="b-komuter" type="text" inputmode="numeric" min="0" step="50000" placeholder="0">
-            <label for="b-skema">Skema Kerja</label>
-            <select id="b-skema">
-              <option value="WFO">WFO</option>
-              <option value="Hybrid">Hybrid</option>
-              <option value="Remote">Remote</option>
-            </select>
-            <label for="b-ptkp">Status PTKP</label>
-            <select id="b-ptkp">
-              <option value="TK/0">TK/0 — Tidak kawin</option>
-              <option value="TK/1">TK/1</option>
-              <option value="TK/2">TK/2</option>
-              <option value="TK/3">TK/3</option>
-              <option value="K/0" selected>K/0 — Kawin</option>
-              <option value="K/1">K/1</option>
-              <option value="K/2">K/2</option>
-              <option value="K/3">K/3</option>
-            </select>
+            <div class="form-group">
+              <label for="b-gaji" class="form-label">Gaji Pokok (Rp)</label>
+              <div class="input-group">
+                <span class="input-prefix">Rp</span>
+                <input type="text" id="b-gaji" name="bGaji" inputmode="numeric" min="0" step="1000" placeholder="contoh: 9000000" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="b-tetap" class="form-label">Tunjangan Tetap (Rp)</label>
+              <div class="input-group">
+                <span class="input-prefix">Rp</span>
+                <input type="text" id="b-tetap" name="bTetap" inputmode="numeric" min="0" step="1000" placeholder="0">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="b-thr" class="form-label">THR (Rp/tahun)</label>
+              <div class="input-group">
+                <span class="input-prefix">Rp</span>
+                <input type="text" id="b-thr" name="bTHR" inputmode="numeric" min="0" step="100000" placeholder="0">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="b-bonus" class="form-label">Bonus Tahunan (Rp)</label>
+              <div class="input-group">
+                <span class="input-prefix">Rp</span>
+                <input type="text" id="b-bonus" name="bBonus" inputmode="numeric" min="0" step="100000" placeholder="0">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="b-manfaat" class="form-label">Manfaat/Asuransi (Rp/bulan)</label>
+              <div class="input-group">
+                <span class="input-prefix">Rp</span>
+                <input type="text" id="b-manfaat" name="bManfaat" inputmode="numeric" min="0" step="50000" placeholder="0">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="b-komuter" class="form-label">Biaya Komuter (Rp/bulan)</label>
+              <div class="input-group">
+                <span class="input-prefix">Rp</span>
+                <input type="text" id="b-komuter" name="bKomuter" inputmode="numeric" min="0" step="50000" placeholder="0">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="b-skema" class="form-label">Skema Kerja</label>
+              <select id="b-skema" name="bSkema" class="select-input">
+                <option value="WFO">WFO</option>
+                <option value="Hybrid">Hybrid</option>
+                <option value="Remote">Remote</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="b-ptkp" class="form-label">Status PTKP</label>
+              <select id="b-ptkp" name="bPtkp" class="select-input">
+                <option value="TK/0">TK/0 — Tidak kawin, 0 Tanggungan</option>
+                <option value="TK/1">TK/1 — Tidak kawin, 1 Tanggungan</option>
+                <option value="TK/2">TK/2 — Tidak kawin, 2 Tanggungan</option>
+                <option value="TK/3">TK/3 — Tidak kawin, 3 Tanggungan</option>
+                <option value="K/0" selected>K/0 — Kawin, 0 Tanggungan</option>
+                <option value="K/1">K/1 — Kawin, 1 Tanggungan</option>
+                <option value="K/2">K/2 — Kawin, 2 Tanggungan</option>
+                <option value="K/3">K/3 — Kawin, 3 Tanggungan</option>
+              </select>
+            </div>
           </fieldset>
         </div>
 
-        <button id="btn-bandingkan" type="submit" class="btn btn-primary">Bandingkan Sekarang</button>
+        <button type="submit" id="btn-bandingkan" class="btn-primary">Bandingkan Sekarang</button>
         <p id="compare-error" class="form-error" hidden></p>
       </form>
 
-      <section id="hasil-compare" class="hasil" hidden>
-        <p id="winner-line" class="winner-line"></p>
-        <div class="compare-grid" id="compare-grid"></div>
-        <p class="catatan">Total kompensasi setahun = THP×12 + THR + bonus + manfaat×12 − komuter×12. Skema kerja dan nilai fleksibilitas ditampilkan sebagai konteks keputusan.</p>
-      </section>
+      <!-- Hasil Compare -->
+      <section id="hasil-compare" class="compare-cards" hidden>
+        <!-- Winner Badge -->
+        <div class="winner-badge" id="winnerBadge" style="display:none;">
+          <div class="label">Rekomendasi Terbaik</div>
+          <div class="text" id="winnerText"></div>
+        </div>
 
-      <section class="rumus-transparan" style="margin-top:24px; padding:16px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px;">
-        <h3 style="margin:0 0 12px 0;">Rumus Transparan & Catatan Pajak</h3>
-        <ul style="margin:0; padding-left:20px; font-size:14px; line-height:1.8; color:#374151;">
-          <li><strong>Biaya komuter</strong> dikurangkan dari total kompensasi setahun (Rp/bulan × 12) karena bersifat biaya wajib untuk dapat bekerja (bukan tunjangan).</li>
-          <li><strong>THR & Bonus</strong> dikenai pajak di bulan diterima (bukan di bulan accrual) — mengikuti ketentuan PPh 21 TER.</li>
-          <li><strong>Proyeksi tahunan</strong> belum termasuk <em>true-up</em> Pasal 17 Masa Pajak Desember (penyesuaian akhir tahun PPh 21). Angka aktual bisa berbeda setelah perhitungan tahunan lengkap.</li>
-          <li>Perhitungan THP bulanan berbasis <strong>tarif PPh 21 TER (PP 58/2023)</strong> + potongan BPJS Kesehatan (1%, cap Rp12jt) & Ketenagakerjaan (JHT 2%, JP 1% cap Rp11,086,300, JKK/JKM per kewajiban perusahaan).</li>
-        </ul>
+        <!-- Compare Cards (stacked mobile, side-by-side desktop) -->
+        <div class="compare-cards" id="compareGrid"></div>
+
+        <!-- Rumus Transparan & Catatan Pajak -->
+        <section class="rumus-transparan">
+          <h3>Rumus Transparan & Catatan Pajak</h3>
+          <ul>
+            <li><strong>Biaya komuter</strong> dikurangkan dari total kompensasi setahun (Rp/bulan × 12) karena bersifat biaya wajib untuk dapat bekerja (bukan tunjangan).</li>
+            <li><strong>THR & Bonus</strong> dikenai pajak di bulan diterima (bukan di bulan accrual) — mengikuti ketentuan PPh 21 TER.</li>
+            <li><strong>Proyeksi tahunan</strong> belum termasuk <em>true-up</em> Pasal 17 Masa Pajak Desember (penyesuaian akhir tahun PPh 21). Angka aktual bisa berbeda setelah perhitungan tahunan lengkap.</li>
+            <li>Perhitungan THP bulanan berbasis <strong>tarif PPh 21 TER (PP 58/2023)</strong> + potongan BPJS Kesehatan (1%, cap Rp12jt) & Ketenagakerjaan (JHT 2%, JP 1% cap Rp11,086,300, JKK/JKM per kewajiban perusahaan).</li>
+          </ul>
+        </section>
       </section>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <p>Dari <a href="https://cvkita.id">CVKita</a> — CV builder gratis untuk fresh graduate Indonesia.</p>
-    <p style="margin-top:8px; font-size:13px; color:#6b7280;">
-      <a href="privacy.html">Kebijakan Privasi</a> ·
-      <a href="terms.html">Syarat & Ketentuan</a> ·
-      <a href="disclaimer.html">Disclaimer</a>
-    </p>
-    <p style="margin-top:4px; font-size:12px; color:#9ca3af;">
-      Simulasi ini bersifat edukatif dan bukan nasihat pajak atau hukum resmi.
-    </p>
+  <!-- Footer Varian A: Local Processing -->
+  <footer class="footer-variant-a">
+    <div class="container">
+      <p class="privacy-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        Kalkulator berjalan 100% lokal di browser Anda
+      </p>
+      <p>Data gaji tidak dikirim atau disimpan di server.</p>
+      <div class="legal-links">
+        <a href="/privacy.html">Kebijakan Privasi</a>
+        <a href="/terms.html">Syarat & Ketentuan</a>
+        <a href="/disclaimer.html">Penafian Hukum</a>
+      </div>
+      <p class="disclaimer">Simulasi ini bersifat edukatif dan bukan nasihat pajak atau hukum resmi.</p>
+    </div>
   </footer>
 
-  <script type="module" src="js/compare-page.js?v=9"></script>
+  <script type="module" src="js/compare-page.js?v=11"></script>
 </body>
 </html>
