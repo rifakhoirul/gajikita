@@ -578,19 +578,18 @@ select {
 }
 
 .paywall-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(4px);
+  /* HG-015: overlay tidak lagi absolute — jadi blok statis di flow normal
+     sehingga CTA tidak menimpa kartu kuning "Contoh Output" di 375x812.
+     Blur visual tetap ditangani .paywall-blur-content di bawahnya. */
+  position: static;
+  background: transparent;
+  backdrop-filter: none;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 20px;
+  padding: 16px 8px 4px;
   text-align: center;
+  gap: 10px;
 }
 
 .paywall-badge {
@@ -618,11 +617,24 @@ select {
   max-width: 280px;
 }
 
+/* HG-015: CTA paywall — full-width blok di flow normal, tanpa underline,
+   harga Rp&nbsp;29.000 tetap satu baris (span nowrap), tanpa clipping. */
 .btn-unlock-pro {
-  min-height: 44px;
-  width: auto;
-  padding: 0 20px;
-  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  text-decoration: none;
+  min-height: 48px;
+  padding: 10px 12px;
+  font-size: 14px;
+  font-weight: 700;
+  box-sizing: border-box;
+}
+
+/* Harga & em-dash tak boleh pindah baris sendiri — sisanya boleh wrap aman. */
+.btn-unlock-pro .price-nowrap {
+  white-space: nowrap;
 }
 
 /* ---- 15. Component: Dropzone (offer-analyzer) ---- */
@@ -637,6 +649,39 @@ select {
 }
 
 .dropzone:hover { border-color: var(--color-primary); }
+
+/* HG-015: sembunyikan input file native, ubah dropzone jadi tombol pilih file.
+   Input tetap di DOM (id offer-pdf utuh utk JS & test) — klik pada dropzone
+   memicu file picker via label wrapper. */
+.dropzone input[type="file"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.dropzone-hint {
+  display: block;
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+
+.dropzone::before {
+  content: "📄 Pilih File PDF";
+  display: inline-block;
+  min-height: 44px;
+  line-height: 44px;
+  padding: 0 20px;
+  background: var(--color-primary);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: var(--radius-md, 10px);
+  pointer-events: none;
+}
 
 /* ---- 16. Component: Compare.html specific ---- */
 /* Winner Badge */

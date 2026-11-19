@@ -107,6 +107,12 @@ function bind() {
 
   // Upload PDF -> /api/import-offer -> isi textarea (modalitas tunggal: teks).
   document.getElementById('offer-pdf').addEventListener('change', async (e) => {
+    // HG-015: refresh label dropzone dengan nama file terpilih (UX feedback).
+    const hint = document.querySelector('.dropzone-hint');
+    if (hint) {
+      const f = e.target.files && e.target.files[0];
+      hint.textContent = f ? `✓ ${f.name} terpilih — klik "Analisis Gratis"` : 'Klik untuk pilih file PDF offering letter';
+    }
     hideError('analyzer-error');
     const file = e.target.files && e.target.files[0];
     if (!file) return;
@@ -209,5 +215,9 @@ function bind() {
     });
   });
 }
+
+// HG-015: klik dropzone (tombol "Pilih File PDF") memicu input file tersembunyi.
+const dz = document.querySelector('.dropzone');
+if (dz) dz.addEventListener('click', () => document.getElementById('offer-pdf').click());
 
 bind();
