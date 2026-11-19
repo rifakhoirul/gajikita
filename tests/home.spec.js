@@ -12,9 +12,13 @@ test('homepage renders brand & hero', async ({ page }) => {
 
 test('asset links use cache-bust ?v=<n>', async ({ page }) => {
   await page.goto(INDEX);
-  const cssHref = await page.locator('link[rel="stylesheet"]').getAttribute('href');
+  // HG-012: 3 stylesheet kini (Google Fonts + design-system + style) — cek yang lokal css/
+  const cssHrefs = await page.locator('link[rel="stylesheet"][href*="css/"]').evaluateAll(
+    els => els.map(el => el.getAttribute('href'))
+  );
+  expect(cssHrefs.length).toBeGreaterThanOrEqual(2);
+  for (const href of cssHrefs) expect(href).toMatch(/\?v=\d+/);
   const jsSrc = await page.locator('script[src]').getAttribute('src');
-  expect(cssHref).toMatch(/\?v=\d+/);
   expect(jsSrc).toMatch(/\?v=\d+/);
 });
 

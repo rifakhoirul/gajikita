@@ -5,7 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Syarat & Ketentuan — GajiCVKita</title>
   <link rel="icon" type="image/png" href="favicon.png">
-<link rel="stylesheet" href="css/style.css?v=7">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/design-system.css?v=12">
+<link rel="stylesheet" href="css/style.css?v=12">
 <style>
   main{max-width:720px;margin:24px auto;padding:0 16px 48px}
   h2{margin:26px 0 10px}
@@ -17,7 +21,19 @@
 </style>
 </head>
 <body>
-<header class="topbar"><a class="logo" href="/" style="text-decoration:none;color:inherit">Gaji<span>CVKita</span></a></header>
+<header class="app-header">
+  <div class="header-inner">
+    <div class="brand-row">
+      <a href="/" class="brand brand-logo">Gaji<span>CVKita</span></a>
+      <span class="brand-badge">Legal</span>
+    </div>
+    <nav class="segmented-nav">
+      <a href="/">Kalkulator</a>
+      <a href="/compare.html">Adu Offer</a>
+      <a href="/offer-analyzer.html">AI Offer Cek</a>
+    </nav>
+  </div>
+</header>
 <main>
   <h2>Syarat & Ketentuan</h2>
   <p class="update">Terakhir diperbarui: 19 November 2026</p>
@@ -70,8 +86,15 @@
   <h3>9. Kontak</h3>
   <p>Pertanyaan soal Syarat: <a href="mailto:kode@cvkita.id">kode@cvkita.id</a>.</p>
 </main>
-<footer class="site-footer">
-  <p><a href="/">Kembali ke GajiCVKita</a> · <a href="privacy.html">Kebijakan Privasi</a> · <a href="disclaimer.html">Disclaimer</a></p>
+<footer class="footer-variant-a site-footer">
+  <div class="container">
+    <p class="privacy-badge">GajiCVKita — Simulator Gaji Bersih & AI Offer Negotiator</p>
+    <div class="legal-links">
+      <a href="/">Kembali ke GajiCVKita</a>
+      <a href="privacy.html">Kebijakan Privasi</a>
+      <a href="disclaimer.html">Penafian Hukum</a>
+    </div>
+  </div>
 </footer>
 </body>
 </html>

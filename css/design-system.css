@@ -1,0 +1,833 @@
+/* ============================================================================
+   Design System — GajiCVKita (Mobile-First Fintech UI v1.1)
+   CSS Tokens, Layout, Components — zero-regression untuk Playwright 67/67
+   ============================================================================ */
+
+/* ---- Google Fonts (preconnect di <head> HTML) ---- */
+/* <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet"> */
+
+/* ---- 1. Design Tokens ( :root ) ---- */
+:root {
+  /* Brand & Accent (Deep Emerald Fintech) */
+  --color-primary: #0F766E;
+  --color-primary-hover: #115E59;
+  --color-primary-soft: #F0FDFA;
+  --color-primary-border: #99F6E4;
+
+  /* Neutral Surfaces */
+  --color-bg: #F8FAFC;
+  --color-surface: #FFFFFF;
+  --color-surface-muted: #F1F5F9;
+  --color-border: #E2E8F0;
+  --color-border-strong: #CBD5E1;
+
+  /* Typography Colors */
+  --color-text-primary: #0F172A;
+  --color-text-secondary: #475569;
+  --color-text-muted: #64748B;
+
+  /* Semantic Status */
+  --color-success: #059669;
+  --color-success-bg: #ECFDF5;
+  --color-warning: #D97706;
+  --color-warning-bg: #FFFBEB;
+  --color-danger: #DC2626;
+  --color-danger-bg: #FEF2F2;
+
+  /* Typography Scale */
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+
+  /* Spacing & Radii */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 9999px;
+
+  /* Elevation */
+  --shadow-card: 0 1px 3px rgba(15, 23, 42, 0.04), 0 1px 2px rgba(15, 23, 42, 0.02);
+  --shadow-focus: 0 0 0 3px rgba(15, 118, 110, 0.15);
+  --shadow-segmented: 0 1px 2px rgba(15, 23, 42, 0.08);
+
+  /* Legacy tokens (compatibility) */
+  --bg: var(--color-surface);
+  --ink: var(--color-text-primary);
+  --muted: var(--color-text-secondary);
+  --brand: var(--color-primary);
+  --brand-dark: var(--color-primary-hover);
+  --accent: var(--color-warning);
+  --line: var(--color-border);
+}
+
+/* ---- 2. Reset & Base ---- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-text-primary);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Tabular numerals untuk seluruh angka finansial */
+.tabular-nums,
+.amount,
+.breakdown-row .val,
+.compare-thp,
+.result-hero-box .amount,
+.input-group input,
+.select-input,
+#thp,
+#thp-tahunan,
+#thpDisplay,
+#grossDisplay,
+#pphDisplay,
+#bpjsKeshDisplay,
+#bpjsJhtDisplay,
+#bpjsJpDisplay,
+#a-gaji, #b-gaji,
+#a-tetap, #b-tetap,
+#a-thr, #b-thr,
+#a-bonus, #b-bonus,
+#a-manfaat, #b-manfaat,
+#a-komuter, #b-komuter,
+#offered-salary,
+#gaji-pokok,
+#tunjangan-tetap,
+#tunjangan-lain,
+#monthlySalary,
+#lic-code {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* Focus visible untuk accessibility */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* ---- 3. Layout Grid & Container ---- */
+.container {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 16px;
+  padding-left: 16px;
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+}
+
+@media (min-width: 820px) {
+  .container-wide {
+    max-width: 820px;
+    margin: 0 auto;
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+}
+
+/* Main content wrapper */
+main {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 16px 48px;
+}
+
+@media (min-width: 640px) {
+  main { padding: 0 24px 64px; }
+}
+
+@media (min-width: 820px) {
+  main.compare-page { max-width: 820px; }
+}
+
+/* ---- 4. Touch Target Minimum (UI-001 Compliant) ---- */
+button,
+a.btn,
+input,
+select,
+.segmented-nav a,
+.preset-chip,
+.btn-primary,
+.btn-secondary,
+.btn-unlock-pro {
+  min-height: 44px;
+}
+
+input,
+select {
+  min-height: 48px;
+  font-size: 16px; /* Mencegah auto-zoom Safari iOS */
+}
+
+/* ---- 5. Component: Compact Sticky Header & Segmented Navigation ---- */
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.header-inner {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 8px 16px;
+}
+
+@media (min-width: 640px) {
+  .header-inner { padding: 8px 24px; }
+}
+
+.brand-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.brand-logo {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--color-text-primary);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.brand-logo span { color: var(--color-primary); }
+
+.brand-badge {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--color-primary);
+  background: var(--color-primary-soft);
+  border: 1px solid var(--color-primary-border);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.segmented-nav {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  background: var(--color-surface-muted);
+  padding: 4px;
+  border-radius: var(--radius-md);
+}
+
+.segmented-nav a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  transition: all 0.15s ease;
+  text-align: center;
+}
+
+.segmented-nav a:hover { color: var(--color-primary); }
+
+.segmented-nav a.active {
+  background: var(--color-surface);
+  color: var(--color-primary);
+  box-shadow: var(--shadow-segmented);
+}
+
+/* ---- 6. Component: Compact Left-Aligned Hero ---- */
+.hero-compact {
+  padding: 12px 0 8px;
+  text-align: left;
+}
+
+.hero-compact h1 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--color-text-primary);
+  margin: 0 0 2px;
+  letter-spacing: -0.02em;
+}
+
+.hero-compact p {
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* ---- 7. Component: Preset Quick-Fill Chips ---- */
+.preset-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  margin-bottom: 12px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.preset-bar::-webkit-scrollbar { display: none; }
+
+.preset-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.preset-chip {
+  min-height: 44px;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-primary);
+  background: var(--color-primary-soft);
+  border: 1px solid var(--color-primary-border);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+}
+
+.preset-chip:hover { background: #E6FFFA; }
+.preset-chip:active { transform: scale(0.96); }
+
+/* ---- 8. Component: Fintech Input Group (Prefix Rp + Tabular Input) ---- */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.form-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.input-group:focus-within {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-focus);
+}
+
+.input-prefix {
+  padding: 0 12px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  background: var(--color-surface-muted);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  border-right: 1px solid var(--color-border);
+  user-select: none;
+}
+
+.input-group input {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  padding: 0 12px;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+  color: var(--color-text-primary);
+  background: transparent;
+}
+
+.input-group input::placeholder { color: #94A3B8; font-weight: 400; }
+
+/* Select Dropdown (Status PTKP) */
+.select-input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 40px 0 12px;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  background-color: var(--color-surface);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  border: 1.5px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.select-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-focus);
+}
+
+/* ---- 9. Component: Primary CTA Button ---- */
+.btn-primary {
+  width: 100%;
+  min-height: 48px;
+  background: var(--color-primary);
+  color: #FFFFFF;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 700;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 2px 4px rgba(15, 118, 110, 0.2);
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.btn-primary:hover { background: var(--color-primary-hover); }
+.btn-primary:active { transform: scale(0.99); }
+
+/* ---- 10. Component: Result Summary Card ---- */
+.result-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  margin-top: 16px;
+  box-shadow: var(--shadow-card);
+}
+
+.result-hero-box {
+  background: linear-gradient(135deg, #0F766E 0%, #115E59 100%);
+  color: #FFFFFF;
+  padding: 16px;
+  border-radius: var(--radius-md);
+  margin-bottom: 16px;
+}
+
+.result-hero-box .label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  opacity: 0.9;
+}
+
+.result-hero-box .amount {
+  font-size: 1.875rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+  letter-spacing: -0.03em;
+  margin: 4px 0;
+  line-height: 1.1;
+}
+
+.result-hero-box .subtext {
+  font-size: 12px;
+  opacity: 0.85;
+}
+
+.breakdown-list { display: flex; flex-direction: column; }
+
+.breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+
+.breakdown-row:last-child { border-bottom: none; }
+
+.breakdown-row .val {
+  font-weight: 700;
+  color: var(--color-text-primary);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+.breakdown-row.deduction .val { color: var(--color-danger); }
+
+/* ---- 11. Component: Secondary / Outline Button ---- */
+.btn-secondary {
+  width: 100%;
+  min-height: 44px;
+  background: transparent;
+  color: var(--color-primary);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 600;
+  border: 1.5px solid var(--color-primary);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: background 0.15s ease;
+}
+
+.btn-secondary:hover { background: var(--color-primary-soft); }
+.btn-secondary:active { background: #E6FFFA; }
+
+/* Chart Wrapper (Donut) */
+.chart-wrapper {
+  max-width: 240px;
+  margin: 16px auto;
+  position: relative;
+}
+
+/* ---- 12. Component: Connected Journey Buttons (index.html hasil) ---- */
+.hasil-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+@media (min-width: 480px) {
+  .hasil-actions { flex-direction: row; flex-wrap: wrap; }
+}
+
+.hasil-actions .btn-secondary { width: 100%; }
+
+@media (min-width: 480px) {
+  .hasil-actions .btn-secondary { width: auto; flex: 1; }
+}
+
+/* ---- 13. Component: Catatan Asumsi ---- */
+.catatan-asumsi {
+  margin-top: 16px;
+  padding: 12px 16px;
+  background: var(--color-surface-muted);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+}
+
+.catatan-asumsi strong { color: var(--color-text-primary); }
+.catatan-asumsi ul { margin: 8px 0 0 0; padding-left: 20px; }
+.catatan-asumsi li { margin-bottom: 4px; }
+
+/* ---- 14. Component: Paywall Card ---- */
+.paywall-card {
+  position: relative;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  overflow: hidden;
+  margin-top: 16px;
+}
+
+.paywall-blur-content {
+  filter: blur(5px);
+  user-select: none;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.paywall-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(4px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  text-align: center;
+}
+
+.paywall-badge {
+  background: #FEF3C7;
+  color: #92400E;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.paywall-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 0 0 4px;
+}
+
+.paywall-desc {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  margin: 0 0 12px;
+  max-width: 280px;
+}
+
+.btn-unlock-pro {
+  min-height: 44px;
+  width: auto;
+  padding: 0 20px;
+  font-size: 13px;
+}
+
+/* ---- 15. Component: Dropzone (offer-analyzer) ---- */
+.dropzone {
+  border: 1.5px dashed var(--color-primary-border);
+  background: var(--color-primary-soft);
+  border-radius: var(--radius-lg);
+  padding: 24px 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+
+.dropzone:hover { border-color: var(--color-primary); }
+
+/* ---- 16. Component: Compare.html specific ---- */
+/* Winner Badge */
+.winner-badge {
+  background: var(--color-success-bg);
+  border: 1px solid var(--color-success);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  margin-bottom: 16px;
+}
+
+.winner-badge .label {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--color-success);
+  text-transform: uppercase;
+}
+
+.winner-badge .text {
+  font-size: 15px;
+  font-weight: 700;
+  color: #065F46;
+  margin-top: 2px;
+}
+
+/* Compare cards stacked on mobile, side-by-side on desktop */
+.compare-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+@media (min-width: 720px) {
+  .compare-cards { grid-template-columns: 1fr 1fr; }
+}
+
+.compare-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+}
+
+.compare-card.winner {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(15, 118, 110, 0.15);
+}
+
+.compare-card h3 { margin: 0 0 6px; font-size: 1rem; }
+
+.compare-thp {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin: 0 0 10px;
+  color: var(--color-primary-hover);
+}
+
+.compare-thp span { font-size: 0.85rem; font-weight: 500; color: var(--color-text-secondary); }
+
+.compare-list { list-style: none; margin: 0; padding: 0; }
+
+.compare-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 5px 0;
+  border-bottom: 1px dashed var(--color-border);
+  font-size: 0.9rem;
+}
+
+.compare-list li:last-child { border-bottom: 0; }
+
+.compare-total {
+  border-top: 2px solid var(--color-border);
+  margin: 10px 0 6px;
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+}
+
+.compare-skema { color: var(--color-text-secondary); font-size: 0.85rem; margin: 0; }
+
+/* Rumus Transparan */
+.rumus-transparan {
+  margin-top: 24px;
+  padding: 16px;
+  background: var(--color-surface-muted);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.rumus-transparan h3 { margin: 0 0 12px; font-size: 1rem; }
+.rumus-transparan ul { margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.8; color: var(--color-text-secondary); }
+.rumus-transparan li { margin-bottom: 6px; }
+
+/* ---- 17. Component: Toast Notification ---- */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: #0F172A;
+  color: #FFFFFF;
+  padding: 10px 16px;
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 100;
+  opacity: 0;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+  pointer-events: none;
+}
+
+.toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+.toast-success { background: var(--color-primary); }
+.toast-error { background: var(--color-danger); }
+
+/* ---- 18. Component: Footer Variants (UU PDP) ---- */
+/* Varian A: Local Processing (index, compare, simulasi) */
+.footer-variant-a {
+  margin-top: 40px;
+  padding: 20px 0;
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.footer-variant-a .container { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+
+.footer-variant-a .privacy-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 600;
+  color: var(--color-success);
+  margin-bottom: 8px;
+}
+
+.footer-variant-a .privacy-badge svg { width: 12px; height: 12px; flex-shrink: 0; }
+
+.footer-variant-a .legal-links {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.footer-variant-a .legal-links a { color: var(--color-text-muted); text-decoration: underline; }
+.footer-variant-a .legal-links a:hover { color: var(--color-primary); }
+
+.footer-variant-a .disclaimer { color: var(--color-text-muted); }
+
+/* Varian B: Temporary AI Processing (offer-analyzer, pay) */
+.footer-variant-b {
+  margin-top: 40px;
+  padding: 20px 0;
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.footer-variant-b .container { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+
+.footer-variant-b p { margin: 0 0 8px; max-width: 600px; line-height: 1.5; }
+
+.footer-variant-b .legal-links {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.footer-variant-b .legal-links a { color: var(--color-text-muted); text-decoration: underline; }
+.footer-variant-b .legal-links a:hover { color: var(--color-primary); }
+
+.footer-variant-b .disclaimer { color: var(--color-text-muted); }
+
+/* ---- 19. Utility: Hide/Show (dipakai JS existing) ---- */
+[hidden] { display: none !important; }
+
+/* ---- 20. Legacy Compatibility (existing class names mapped) ---- */
+/* Existing .site-header -> .app-header already handled via HTML swap */
+/* Existing .kalkulator -> .result-card style for result area */
+/* Existing .btn -> .btn-primary / .btn-secondary */
+/* Existing .card -> .rincian / .compare-card */
+/* Existing .form-group, .input-group enhanced above */
