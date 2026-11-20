@@ -1,77 +1,81 @@
-// HG-018: Underline tabs ramping, gap header->h1 <= 16px, surface vs background
-// kontras (#F4F7F9 body vs #FFF header/card), preset chip ramping. Murni CSS.
+// HG-017: Proporsi compact header/hero/preset (mobile-first fintech).
+// Murni CSS — id/selector/JS logic tidak berubah.
 const { test, expect } = require('@playwright/test');
 
-test('HG-018: underline tab, gap atas rapat, kontras surface, preset ramping', async ({ page }) => {
+test('HG-017: header, segmented-nav, hero, preset chip proporsi ringkas', async ({ page }) => {
   await page.goto('/index.html');
   await page.waitForSelector('.app-header');
 
-  // 1. Nav = underline tab: tanpa kotak abu, garis bawah tipis, tab aktif primary
-  const nav = await page.locator('.segmented-nav').evaluate(el => {
-    const cs = getComputedStyle(el);
-    return { bg: cs.backgroundColor, pad: cs.padding, radius: cs.borderRadius };
+  // 1. Header ramping
+  const inner = await page.locator('.header-inner').evaluate((el) => {
+    const s = getComputedStyle(el);
+    return { pad: s.padding, mb: getComputedStyle(el.querySelector('.brand-row') || el.parentElement.querySelector('.brand-row')).marginBottom };
   });
-  const rgba = nav.bg.match(/[\d.]+/g) || [];
-  const alpha = parseFloat(rgba[3] ?? '1');
-  const transparent = alpha === 0;
-  expect(transparent || nav.bg === 'rgba(0, 0, 0, 0)').toBe(true);
-  expect(parseFloat(nav.pad)).toBeLessThanOrEqual(2);
-  expect(parseFloat(nav.radius)).toBeLessThanOrEqual(2);
+  expect(inner.pad).toBe('8px 16px 10px');
+  expect(inner.mb).toBe('6px');
 
-  const hdr = await page.locator('.app-header').evaluate(el => {
-    const cs = getComputedStyle(el);
-    return { bb: cs.borderBottomWidth, bc: cs.borderBottomColor };
+  const logo = await page.locator('.brand-logo').first().evaluate((el) => {
+    const s = getComputedStyle(el);
+    return { fs: s.fontSize, ls: s.letterSpacing };
   });
-  expect(hdr.bb).toBe('1px');
-  expect(hdr.bc).toBe('rgb(226, 232, 240)');
+  expect(logo.fs).toBe('16px');
+  expect(parseFloat(logo.ls)).toBeLessThan(0);
 
-  const active = await page.locator('.segmented-nav a.active').evaluate(el => {
-    const cs = getComputedStyle(el);
-    return { color: cs.color, fw: cs.fontWeight, bb: cs.borderBottomWidth, bbc: cs.borderBottomColor };
+  const badge = await page.locator('.brand-badge').first().evaluate((el) => {
+    const s = getComputedStyle(el);
+    return { bs: s.borderStyle, pad: s.padding, fs: s.fontSize };
   });
-  expect(active.fw).toBe('700');
-  expect(active.bb).toBe('2px');
-  expect(active.bbc).toBe('rgb(15, 118, 110)');
+  expect(badge.bs).toBe('none');
+  expect(badge.pad).toBe('2px 8px');
+  expect(badge.fs).toBe('10px');
 
-  // min-height 44px tap-target tetap terjaga (HG-012)
-  const tabH = await page.locator('.segmented-nav a.active').evaluate(el => el.getBoundingClientRect().height);
-  expect(tabH).toBeGreaterThanOrEqual(43.5);
-
-  // 2. Gap bawah header -> h1 maksimal 16px
-  const gap = await page.evaluate(() => {
-    const h = document.querySelector('.app-header').getBoundingClientRect();
-    const t = document.querySelector('.hero-compact h1').getBoundingClientRect();
-    return t.top - h.bottom;
+  // 2. Segmented nav tegas
+  const nav = await page.locator('.segmented-nav').evaluate((el) => {
+    const s = getComputedStyle(el);
+    return { pad: s.padding, bg: s.backgroundColor, br: s.borderRadius };
   });
-  expect(gap).toBeLessThanOrEqual(16);
+  expect(nav.pad).toBe('3px');
+  expect(nav.bg).toBe('rgb(238, 242, 246)');
+  expect(parseFloat(nav.br)).toBe(10);
 
-  // 3. Kontras surface: body #F4F7F9, header & card #FFFFFF
-  const colors = await page.evaluate(() => ({
-    body: getComputedStyle(document.body).backgroundColor,
-    header: getComputedStyle(document.querySelector('.app-header')).backgroundColor,
-    card: getComputedStyle(document.querySelector('.card')).backgroundColor,
-  }));
-  expect(colors.body).toBe('rgb(244, 247, 249)');
-  expect(colors.header).toBe('rgb(255, 255, 255)');
-  expect(colors.card).toBe('rgb(255, 255, 255)');
-
-  // 4. Preset chip ramping: pad vertikal 6px, font 12px, radius 8px, tetap >=44px tinggi
-  const chip = await page.locator('.preset-chip').first().evaluate(el => {
-    const cs = getComputedStyle(el);
-    return { pt: cs.paddingTop, pb: cs.paddingBottom, fs: cs.fontSize, r: cs.borderRadius, h: el.getBoundingClientRect().height };
+  const active = await page.locator('.segmented-nav a.active').evaluate((el) => {
+    const s = getComputedStyle(el);
+    return { fw: parseInt(s.fontWeight), shadow: s.boxShadow, h: el.getBoundingClientRect().height };
   });
-  expect(parseFloat(chip.pt)).toBeLessThanOrEqual(7);
-  expect(parseFloat(chip.pb)).toBeLessThanOrEqual(7);
+  expect(active.fw).toBe(700);
+  expect(active.shadow).toContain('rgba(15, 23, 42, 0.12)');
+  expect(active.h).toBeGreaterThanOrEqual(44);
+
+  // 3. Hero rapat
+  const hero = await page.locator('.hero-compact').evaluate((el) => {
+    const s = getComputedStyle(el);
+    return { pt: s.paddingTop, mt: s.marginTop };
+  });
+  expect(hero.pt).toBe('12px');
+  expect(hero.mt).toBe('0px');
+
+  const h1 = await page.locator('.hero-compact h1').evaluate((el) => {
+    const s = getComputedStyle(el);
+    return { lh: parseFloat(s.lineHeight) / parseFloat(s.fontSize), mb: s.marginBottom };
+  });
+  expect(h1.lh).toBeCloseTo(1.2, 1);
+  expect(h1.mb).toBe('4px');
+
+  // 4. Preset chip pipih tapi tetap >=44px
+  const chip = await page.locator('.preset-chip').first().evaluate((el) => {
+    const s = getComputedStyle(el);
+    return { pad: s.padding, br: s.borderRadius, fs: s.fontSize, h: el.getBoundingClientRect().height };
+  });
+  expect(chip.pad).toBe('0px 12px');
+  expect(parseFloat(chip.br)).toBe(8);
   expect(chip.fs).toBe('12px');
-  expect(parseFloat(chip.r)).toBeLessThanOrEqual(9);
-  expect(chip.h).toBeGreaterThanOrEqual(43.5);
+  expect(chip.h).toBeGreaterThanOrEqual(44);
 
-  // Desktop 1280x800: tanpa regresi, gap tetap rapat
-  await page.setViewportSize({ width: 1280, height: 800 });
-  const dGap = await page.evaluate(() => {
-    const h = document.querySelector('.app-header').getBoundingClientRect();
-    const t = document.querySelector('.hero-compact h1').getBoundingClientRect();
-    return t.top - h.bottom;
-  });
-  expect(dGap).toBeLessThanOrEqual(24);
+  // Tetap lulus assertionHG-012: nav link >= 44
+  const navLink = await page.locator('.segmented-nav a').first().evaluate((el) => el.getBoundingClientRect().height);
+  expect(navLink).toBeGreaterThanOrEqual(44);
+
+  // No horizontal overflow 375x812
+  const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+  expect(overflow).toBeLessThanOrEqual(0);
 });
