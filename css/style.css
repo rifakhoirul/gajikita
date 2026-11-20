@@ -165,18 +165,46 @@ main { max-width: 960px; margin: 0 auto; padding: 24px 20px 48px; }
 }
 @media (min-width: 640px) { .hasil-grid { grid-template-columns: 1.4fr 1fr; } }
 
+/* HG-016 — .rincian di dalam .result-card: tanpa border/padding berlapis
+   (single-border, ruang horizontal mobile lebih lega). Halaman lain yang
+   memakai .rincian di luar result-card tetap berborder seperti biasa. */
+.result-card .rincian {
+  border: none;
+  padding: 0;
+}
+
 .rincian { border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
 .rincian h3 { margin: 0 0 8px; font-size: 0.95rem; }
 .rincian ul { list-style: none; margin: 0; padding: 0; }
 .rincian li {
   display: flex;
   justify-content: space-between;
+  align-items: baseline;
   gap: 12px;
   padding: 6px 0;
   border-bottom: 1px dashed var(--line);
   font-size: 0.92rem;
 }
 .rincian li:last-child { border-bottom: 0; font-weight: 700; }
+
+/* HG-016 — baris rincian potongan (#rincian-potongan, index.html): label kiri
+   fleksibel, nominal kanan anti-wrap (nowrap + flex-shrink 0 + rata kanan +
+   tabular-nums). Di-scope per-ID agar list .rincian di offer-analyzer tak terdampak. */
+#rincian-potongan li > span {
+  flex: 1;
+  min-width: 0;
+  padding-right: 12px;
+}
+#rincian-potongan li > strong {
+  white-space: nowrap;
+  flex-shrink: 0;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+  color: var(--color-danger); /* default: baris potongan (-Rp ...) */
+}
+/* Baris pertama = Gaji bruto (bukan potongan) → warna normal */
+#rincian-potongan li:first-child > strong { color: inherit; }
 
 .donut-wrap { text-align: center; }
 #donut { width: 160px; height: 160px; }

@@ -486,11 +486,22 @@ select {
 
 .breakdown-row:last-child { border-bottom: none; }
 
+/* HG-016 — anti-wrap nominal + label kiri fleksibel */
 .breakdown-row .val {
   font-weight: 700;
   color: var(--color-text-primary);
   font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum" 1;
+  white-space: nowrap;
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.breakdown-row .label {
+  flex: 1;
+  min-width: 0;
+  padding-right: 12px;
+  text-align: left;
 }
 
 .breakdown-row.deduction .val { color: var(--color-danger); }
