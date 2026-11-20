@@ -14,7 +14,7 @@ body {
   margin: 0;
   font-family: var(--font-sans);
   color: var(--ink);
-  background: var(--bg);
+  background: #F4F7F9;
   line-height: 1.6;
 }
 
@@ -46,6 +46,9 @@ body {
 
 main { max-width: 960px; margin: 0 auto; padding: 24px 20px 48px; }
 
+/* HG-018: halaman dengan sticky .app-header — rapatkan jarak header ke konten */
+.app-header ~ main { padding-top: 2px; }
+
 .hero { text-align: center; padding: 40px 0 24px; }
 .hero h1 { font-size: clamp(1.6rem, 4vw, 2.4rem); margin: 0 0 12px; }
 .hero .sub { color: var(--muted); max-width: 640px; margin: 0 auto 20px; }
@@ -68,6 +71,7 @@ main { max-width: 960px; margin: 0 auto; padding: 24px 20px 48px; }
 }
 
 .card {
+  background: var(--color-surface);
   border: 1px solid var(--line);
   border-radius: 12px;
   padding: 18px;
